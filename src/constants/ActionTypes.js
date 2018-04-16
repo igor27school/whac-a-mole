@@ -1,0 +1,1 @@
+export const RECEIVE_BILLS = 'RECEIVE_BILLS'
