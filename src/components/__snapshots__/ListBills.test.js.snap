@@ -1,0 +1,17 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ListBills tests Bills match the snapshot 1`] = `
+<div>
+  <h2>
+    BILLS
+  </h2>
+  <ul>
+    <li>
+      bill title 1
+    </li>
+    <li>
+      bill title 2
+    </li>
+  </ul>
+</div>
+`;
