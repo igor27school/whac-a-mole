@@ -2,9 +2,10 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import { fetchBillsFromServer } from '../actions/ActionCreators'
+import BillSummary from './BillSummary'
 
 /**
-* @description Displays specified bills as a list.
+* @description Displays bills as a list.
 */
 export class ListBills extends Component {
   static propTypes = {
@@ -30,7 +31,7 @@ export class ListBills extends Component {
         <ul>
           {bills.map(bill => (
             <li key={bill.id}>
-              {bill.title}
+              <BillSummary billId={bill.id}/>
             </li>
           ))}
         </ul>

@@ -5,19 +5,19 @@ const initialState = {
   allIds: [],
 }
 
-function senators(state=initialState, action) {
+function votes(state=initialState, action) {
   switch(action.type) {
-    case ActionTypes.RECEIVE_SENATORS:
-      return action.senators.reduce((state, senator) => {
+    case ActionTypes.RECEIVE_VOTES_FOR_BILL:
+      return action.votes.reduce((state, vote) => {
         return {
           ...state,
           byId: {
             ...state.byId,
-            [senator.id]: {
-              ...senator,
+            [vote.id]: {
+              ...vote,
             }
           },
-          allIds: state.allIds.concat([senator.id])
+          allIds: state.allIds.concat([vote.id])
         }
       },
       initialState,
@@ -27,4 +27,4 @@ function senators(state=initialState, action) {
   }
 }
 
-export default senators
+export default votes

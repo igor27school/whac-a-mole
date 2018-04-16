@@ -22,6 +22,17 @@ function bills(state=initialState, action) {
       },
       initialState,
     )
+    case ActionTypes.RECEIVE_VOTES_FOR_BILL:
+      return {
+        ...state,
+        byId: {
+          ...state.byId,
+          [action.billId]: {
+            ...state.byId[action.billId],
+            votes: action.votes.map(vote => vote.id),
+          },
+        },
+      }
     default:
       return state
   }
