@@ -22,6 +22,17 @@ function senators(state=initialState, action) {
       },
       initialState,
     )
+    case ActionTypes.RECEIVE_VOTES_FOR_SENATOR:
+      return {
+        ...state,
+        byId: {
+          ...state.byId,
+          [action.senatorId]: {
+            ...state.byId[action.senatorId],
+            votes: action.votes.map(vote => vote.id),
+          },
+        },
+      }
     default:
       return state
   }

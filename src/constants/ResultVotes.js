@@ -1,3 +1,3 @@
-export const ABSTAIN = 'ABSTAIN'
+export const ABSENT = 'ABSENT'
 export const NO = 'NO'
 export const YES = 'YES'

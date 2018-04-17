@@ -36,7 +36,6 @@ export class VoteSummary extends Component {
     }
     return (
       <div>
-
         <SenatorNickname senatorId={vote.senatorId}/> voted {vote.resultVote} on <BillTitle billId={vote.billId}/> (<Link to={`/vote/${vote.id}`}>Details about the vote</Link>)
       </div>
     )

@@ -8,6 +8,7 @@ const initialState = {
 function votes(state=initialState, action) {
   switch(action.type) {
     case ActionTypes.RECEIVE_VOTES_FOR_BILL:
+    case ActionTypes.RECEIVE_VOTES_FOR_SENATOR:
       return action.votes.reduce((state, vote) => {
         return {
           ...state,

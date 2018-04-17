@@ -5,7 +5,7 @@ import { fetchBillFromServer, fetchVotesForBillFromServer } from '../actions/Act
 import VoteSummary from './VoteSummary'
 
 /**
-* @description Displays bills as a list.
+* @description Displays votes on a particular bill.
 */
 export class BillDetails extends Component {
   static propTypes = {
@@ -48,9 +48,9 @@ export class BillDetails extends Component {
         <h2>BILL: {bill.title}</h2>
         <h2>VOTES</h2>
         <ul>
-          {votes.map(vote => (
-            <li key={vote.id}>
-              <VoteSummary voteId={vote.id}/>
+          {votes.map(voteId => (
+            <li key={voteId}>
+              <VoteSummary voteId={voteId}/>
             </li>
           ))}
         </ul>
@@ -65,7 +65,7 @@ function mapStateToProps ({ bills, votes }, {match}) {
   return {
     bill,
     billId,
-    votes: bill && bill.votes ? bill.votes.map(voteId => votes.byId[voteId]) : [],
+    votes: bill && bill.votes ? bill.votes : [],
     hasBills: bills.allIds.length > 0,
     hasVotes: bill && bill.votes && bill.votes.length > 0 ? true : false,
   }

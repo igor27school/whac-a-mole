@@ -26,20 +26,35 @@ export const getVotesForBill = billId => Promise.resolve([
   {
     id: 'vote1',
     senatorId: 'senator1',
-    billId: 'bill1',
+    billId: billId,
     resultVote: YES,
   },
   {
     id: 'vote2',
     senatorId: 'senator2',
+    billId: billId,
+    resultVote: YES,
+  },
+])
+
+export const getVotesForSenator = senatorId => Promise.resolve([
+  {
+    id: 'vote1',
+    senatorId: senatorId,
     billId: 'bill1',
+    resultVote: YES,
+  },
+  {
+    id: 'vote2',
+    senatorId: senatorId,
+    billId: 'bill2',
     resultVote: YES,
   },
 ])
 
 export const getVote = voteId => Promise.resolve([
   {
-    voteId: `${voteId}`,
+    id: `${voteId}`,
     senatorId: 'senator2',
     billId: 'bill1',
     resultVote: YES,
