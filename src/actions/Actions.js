@@ -26,3 +26,9 @@ export const receiveVote = vote => ({
   type: types.RECEIVE_VOTE,
   vote,
 })
+
+export const modifyVote = (id, voteType) => ({
+  type: types.MODIFY_VOTE,
+  id,
+  voteType,
+})

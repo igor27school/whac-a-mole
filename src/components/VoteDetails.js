@@ -1,15 +1,15 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { Link } from 'react-router-dom'
 import PropTypes from 'prop-types'
 import { fetchVoteFromServer } from '../actions/ActionCreators'
-import BillTitle from './BillTitle'
-import SenatorNickname from './SenatorNickname'
+import BillOverview from './BillOverview'
+import SenatorOverview from './SenatorOverview'
+import Voter from './Voter'
 
 /**
-* @description This component is used in BillDetails view. It displays the information releavant to a particular vote.
+* @description This component displays all the information releavant to a particular vote.
 */
-export class VoteSummary extends Component {
+export class VoteDetails extends Component {
   static propTypes = {
     hasVote: PropTypes.bool.isRequired,
     voteId: PropTypes.string.isRequired,
@@ -38,15 +38,21 @@ export class VoteSummary extends Component {
     }
     return (
       <div>
-        <SenatorNickname senatorId={vote.senatorId}/> voted {vote.resultVote} on <BillTitle billId={vote.billId}/> {vote.down} {vote.up} (<Link to={`/vote/${vote.id}`}>Details about the vote</Link>)
+        <SenatorOverview senatorId={vote.senatorId}/>
+        <BillOverview billId={vote.billId}/>
+        <h5>The vote on record is {vote.resultVote}</h5>
+        <label><input name="agreement" type="checkbox"/>I have carefully studied the evidence and have come to my decision</label>
+        <Voter id={vote.id}/>
       </div>
     )
   }
 }
 
-function mapStateToProps ({ votes }, { voteId }) {
+function mapStateToProps ({ votes }, { match }) {
+  const voteId=match.params.vote_id
   return {
     vote: votes.byId[voteId],
+    voteId,
     hasVote: voteId in votes.byId,
   }
 }
@@ -57,4 +63,4 @@ function mapDispatchToProps (dispatch) {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(VoteSummary)
+export default connect(mapStateToProps, mapDispatchToProps)(VoteDetails)
