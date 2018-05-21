@@ -2,18 +2,8 @@ import { YES } from '../constants/ResultVotes'
 
 const api = 'http://localhost:3001'
 
-export const getBills = () => Promise.resolve([
-  {
-    _id: 'bill1',
-    title: 'Bill 1',
-    description: 'Bill description 1',
-  },
-  {
-    _id: 'bill2',
-    title: 'Bill 2',
-    description: 'Bill description 2',
-  },
-])
+export const getBills = () =>
+  fetch(`${api}/bills`).then(res => res.json())
 
 export const getSenators = () =>
   fetch(`${api}/reps`).then(res => res.json())
