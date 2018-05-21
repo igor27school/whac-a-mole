@@ -12,7 +12,11 @@ if (!userArgs[0].startsWith('mongodb://')) {
 var async = require('async')
 var fs = require('fs')
 var Rep = require('./models/rep')
+var Bill = require('./models/bill')
+var Vote = require('./models/vote')
 
+let reps = {}
+let bills = {}
 
 var mongoose = require('mongoose')
 var mongoDB = userArgs[0]
@@ -29,32 +33,82 @@ function repCreate(_id, name, state, cb) {
       return
     }
     console.log('New Rep: ' + rep)
+    reps[rep['_id']] = rep
     cb(null, rep)
-  }  )
+  })
 }
 
-function createReps(cb) {
-    const reps = JSON.parse(fs.readFileSync('/tmp/reps_senate.json'))['reps']
-    const array_functions = []
-    for (let i=0; i<reps.length; i++) {
-      let rep = reps[i]
-      array_functions.push(function(callback) {
-        repCreate(rep['_id'], rep['rep_name'], rep['state'], callback)
-      })
+function billCreate(_id, title, summary, cb) {
+  var bill = new Bill({_id, title, summary})
+
+  bill.save(function (err) {
+    if (err) {
+      cb(err, null)
+      return
     }
-    async.parallel(array_functions,
-        // optional callback
-        cb);
+    console.log('New Bill: ' + bill)
+    bills[bill['_id']] = bill
+    cb(null, bill)
+  })
 }
 
-createReps(function(err, results) {
-  if (err) {
-      console.log('FINAL ERR: '+err);
-  }
-  else {
-      console.log('Successfully saved reps.')
+function voteCreate(_id, rep, bill, outcome, cb) {
+  var vote = new Vote({_id, rep, bill, outcome})
 
+  vote.save(function (err) {
+    if (err) {
+      cb(err, null)
+      return
+    }
+    console.log('New Vote: ' + vote)
+    cb(null, vote)
+  })
+}
+
+function createRepsAndBills(cb) {
+  const array_functions = []
+  const reps = JSON.parse(fs.readFileSync('/tmp/reps_senate.json'))['reps']
+  for (let i=0; i<reps.length; i++) {
+    let rep = reps[i]
+    array_functions.push(function(callback) {
+      repCreate(rep['_id'], rep['rep_name'], rep['state'], callback)
+    })
   }
-  // All done, disconnect from database
-  mongoose.connection.close()
-})
+  const bills = JSON.parse(fs.readFileSync('/tmp/bills_senate.json'))['bills']
+  for (let i=0; i<bills.length; i++) {
+    let bill = bills[i]
+    array_functions.push(function(callback) {
+      billCreate(bill['_id'], bill['title'], bill['summary'], callback)
+    })
+  }
+  async.parallel(array_functions, cb);
+}
+
+function createVotes(cb) {
+  const array_functions = []
+  const votes = JSON.parse(fs.readFileSync('/tmp/votes_senate.json'))['votes']
+  for (let i=0; i<votes.length; i++) {
+    let vote = votes[i]
+    array_functions.push(function(callback) {
+      voteCreate(vote['_id'], reps[vote['rep_id']], bills[vote['bill_id']], vote['outcome'].toUpperCase(), callback)
+    })
+  }
+  async.parallel(array_functions, cb);
+}
+
+async.series([
+    createRepsAndBills,
+    createVotes
+],
+// Optional callback
+function(err, results) {
+    if (err) {
+        console.log('FINAL ERR: '+err);
+    }
+    else {
+        console.log('Successfully saved reps, bills and votes')
+
+    }
+    // All done, disconnect from database
+    mongoose.connection.close();
+});

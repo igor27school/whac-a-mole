@@ -1,4 +1,4 @@
-import { YES, NO, ABSENT } from '../../constants/VoteTypes'
+//import { YES, NO, ABSENT } from '../../constants/VoteTypes'
 
 var mongoose = require('mongoose')
 
@@ -6,9 +6,10 @@ var Schema = mongoose.Schema
 
 var VoteSchema = new Schema(
   {
+    _id: {type: String, required: true},
     rep: {type: Schema.ObjectId, ref: 'Rep', required: true},
     bill: {type: Schema.ObjectId, ref: 'Bill', required: true},
-    outcome: {type: String, required: true, enum: [YES, NO, ABSENT]}
+    outcome: {type: String, required: true, enum: ['YES', 'NO', 'ABSENT']}
   }
 )
 
