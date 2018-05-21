@@ -12,11 +12,11 @@ function votes(state=initialState, action) {
         ...state,
         byId: {
           ...state.byId,
-          [action.vote.id]: {
+          [action.vote._id]: {
             ...action.vote,
           }
         },
-        allIds: state.allIds.concat([action.vote.id])
+        allIds: state.allIds.concat([action.vote._id])
       }
     case ActionTypes.RECEIVE_VOTES_FOR_BILL:
     case ActionTypes.RECEIVE_VOTES_FOR_SENATOR:
@@ -25,11 +25,11 @@ function votes(state=initialState, action) {
           ...state,
           byId: {
             ...state.byId,
-            [vote.id]: {
+            [vote._id]: {
               ...vote,
             }
           },
-          allIds: state.allIds.concat([vote.id])
+          allIds: state.allIds.concat([vote._id])
         }
       },
       initialState,

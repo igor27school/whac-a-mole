@@ -11,7 +11,7 @@ export class SenatorNickname extends Component {
   static propTypes = {
     hasSenators: PropTypes.bool.isRequired,
     senator: PropTypes.shape({
-      id: PropTypes.string.isRequired,
+      _id: PropTypes.string.isRequired,
       name: PropTypes.string.isRequired,
     }),
     senatorId: PropTypes.string.isRequired,
@@ -31,7 +31,7 @@ export class SenatorNickname extends Component {
       )
     }
     return (
-      <Link to={`/senator/${senator.id}`}>{senator.name}</Link>
+      <Link to={`/senator/${senator._id}`}>{senator.name}</Link>
     )
   }
 }

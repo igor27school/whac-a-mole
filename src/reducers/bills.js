@@ -13,11 +13,11 @@ function bills(state=initialState, action) {
           ...state,
           byId: {
             ...state.byId,
-            [bill.id]: {
+            [bill._id]: {
               ...bill,
             }
           },
-          allIds: state.allIds.concat([bill.id])
+          allIds: state.allIds.concat([bill._id])
         }
       },
       initialState,
@@ -29,7 +29,7 @@ function bills(state=initialState, action) {
           ...state.byId,
           [action.billId]: {
             ...state.byId[action.billId],
-            votes: action.votes.map(vote => vote.id),
+            votes: action.votes.map(vote => vote._id),
           },
         },
       }

@@ -12,7 +12,7 @@ export class ListSenators extends Component {
     hasSenators: PropTypes.bool.isRequired,
     senators: PropTypes.arrayOf(
       PropTypes.shape({
-        id: PropTypes.string.isRequired,
+        _id: PropTypes.string.isRequired,
         name: PropTypes.string.isRequired,
       })
     ).isRequired,
@@ -30,8 +30,8 @@ export class ListSenators extends Component {
         <h2>SENATORS</h2>
         <ul>
           {senators.map(senator => (
-            <li key={senator.id}>
-              <SenatorNickname senatorId={senator.id}/>
+            <li key={senator._id}>
+              <SenatorNickname senatorId={senator._id}/>
             </li>
           ))}
         </ul>

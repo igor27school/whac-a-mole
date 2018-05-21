@@ -13,11 +13,11 @@ function senators(state=initialState, action) {
           ...state,
           byId: {
             ...state.byId,
-            [senator.id]: {
+            [senator._id]: {
               ...senator,
             }
           },
-          allIds: state.allIds.concat([senator.id])
+          allIds: state.allIds.concat([senator._id])
         }
       },
       initialState,
@@ -29,7 +29,7 @@ function senators(state=initialState, action) {
           ...state.byId,
           [action.senatorId]: {
             ...state.byId[action.senatorId],
-            votes: action.votes.map(vote => vote.id),
+            votes: action.votes.map(vote => vote._id),
           },
         },
       }

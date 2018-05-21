@@ -1,34 +1,26 @@
 import { YES } from '../constants/ResultVotes'
 
+const api = 'http://localhost:3001'
+
 export const getBills = () => Promise.resolve([
   {
-    id: 'bill1',
+    _id: 'bill1',
     title: 'Bill 1',
     description: 'Bill description 1',
   },
   {
-    id: 'bill2',
+    _id: 'bill2',
     title: 'Bill 2',
     description: 'Bill description 2',
   },
 ])
 
-export const getSenators = () => Promise.resolve([
-  {
-    id: 'senator1',
-    name: 'Senator name 1',
-    state: 'MA',
-  },
-  {
-    id: 'senator2',
-    name: 'Senator name 2',
-    state: 'CA',
-  },
-])
+export const getSenators = () =>
+  fetch(`${api}/reps`).then(res => res.json())
 
 export const getVotesForBill = billId => Promise.resolve([
   {
-    id: 'vote1',
+    _id: 'vote1',
     senatorId: 'senator1',
     billId: billId,
     resultVote: YES,
@@ -36,7 +28,7 @@ export const getVotesForBill = billId => Promise.resolve([
     up: 0,
   },
   {
-    id: 'vote2',
+    _id: 'vote2',
     senatorId: 'senator2',
     billId: billId,
     resultVote: YES,
@@ -47,7 +39,7 @@ export const getVotesForBill = billId => Promise.resolve([
 
 export const getVotesForSenator = senatorId => Promise.resolve([
   {
-    id: 'vote1',
+    _id: 'vote1',
     senatorId: senatorId,
     billId: 'bill1',
     resultVote: YES,
@@ -55,7 +47,7 @@ export const getVotesForSenator = senatorId => Promise.resolve([
     up: 5,
   },
   {
-    id: 'vote2',
+    _id: 'vote2',
     senatorId: senatorId,
     billId: 'bill2',
     resultVote: YES,
@@ -66,7 +58,7 @@ export const getVotesForSenator = senatorId => Promise.resolve([
 
 export const getVote = voteId => Promise.resolve(
   {
-    id: voteId,
+    _id: voteId,
     senatorId: 'senator2',
     billId: 'bill1',
     resultVote: YES,
@@ -77,7 +69,7 @@ export const getVote = voteId => Promise.resolve(
 
 export const sendVote = voteId => Promise.resolve(
   {
-    id: voteId,
+    _id: voteId,
     senatorId: 'senator1',
     billId: 'bill1',
     resultVote: YES,

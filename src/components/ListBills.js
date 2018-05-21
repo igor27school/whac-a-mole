@@ -12,7 +12,7 @@ export class ListBills extends Component {
     hasBills: PropTypes.bool.isRequired,
     bills: PropTypes.arrayOf(
       PropTypes.shape({
-        id: PropTypes.string.isRequired,
+        _id: PropTypes.string.isRequired,
         title: PropTypes.string.isRequired,
       })
     ).isRequired,
@@ -30,8 +30,8 @@ export class ListBills extends Component {
         <h2>BILLS</h2>
         <ul>
           {bills.map(bill => (
-            <li key={bill.id}>
-              <BillSummary billId={bill.id}/>
+            <li key={bill._id}>
+              <BillSummary billId={bill._id}/>
             </li>
           ))}
         </ul>
