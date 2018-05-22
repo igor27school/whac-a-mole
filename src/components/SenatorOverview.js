@@ -11,7 +11,7 @@ export class SenatorOverview extends Component {
     hasSenator: PropTypes.bool.isRequired,
     senatorId: PropTypes.string.isRequired,
     senator: PropTypes.shape({
-      id: PropTypes.string.isRequired,
+      _id: PropTypes.string.isRequired,
       name: PropTypes.string.isRequired,
       state: PropTypes.string.isRequired,
     }),

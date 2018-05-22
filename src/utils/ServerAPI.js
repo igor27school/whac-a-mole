@@ -8,54 +8,14 @@ export const getBills = () =>
 export const getSenators = () =>
   fetch(`${api}/reps`).then(res => res.json())
 
-export const getVotesForBill = billId => Promise.resolve([
-  {
-    _id: 'vote1',
-    senatorId: 'senator1',
-    billId: billId,
-    resultVote: YES,
-    down: 0,
-    up: 0,
-  },
-  {
-    _id: 'vote2',
-    senatorId: 'senator2',
-    billId: billId,
-    resultVote: YES,
-    down: 0,
-    up: 0,
-  },
-])
+export const getVotesForBill = billId =>
+  fetch(`${api}/votes?billId=${billId}`).then(res => res.json())
 
-export const getVotesForSenator = senatorId => Promise.resolve([
-  {
-    _id: 'vote1',
-    senatorId: senatorId,
-    billId: 'bill1',
-    resultVote: YES,
-    down: 0,
-    up: 5,
-  },
-  {
-    _id: 'vote2',
-    senatorId: senatorId,
-    billId: 'bill2',
-    resultVote: YES,
-    down: 5,
-    up: 0,
-  },
-])
+export const getVotesForSenator = senatorId =>
+  fetch(`${api}/votes?repId=${senatorId}`).then(res => res.json())
 
-export const getVote = voteId => Promise.resolve(
-  {
-    _id: voteId,
-    senatorId: 'senator2',
-    billId: 'bill1',
-    resultVote: YES,
-    down: 0,
-    up: 0,
-  },
-)
+export const getVote = voteId =>
+  fetch(`${api}/vote/${voteId}`).then(res => res.json())
 
 export const sendVote = voteId => Promise.resolve(
   {

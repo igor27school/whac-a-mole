@@ -11,9 +11,9 @@ export class BillOverview extends Component {
     hasBill: PropTypes.bool.isRequired,
     billId: PropTypes.string.isRequired,
     bill: PropTypes.shape({
-      id: PropTypes.string.isRequired,
+      _id: PropTypes.string.isRequired,
       title: PropTypes.string.isRequired,
-      description: PropTypes.string.isRequired,
+      summary: PropTypes.string.isRequired,
     }),
   }
   componentDidMount() {
@@ -36,7 +36,7 @@ export class BillOverview extends Component {
     return (
       <div>
         <h2>BILL: {bill.title}</h2>
-        <h3>Description: {bill.description}</h3>
+        <h3>Description: {bill.summary}</h3>
       </div>
     )
   }

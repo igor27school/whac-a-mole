@@ -7,8 +7,8 @@ var Schema = mongoose.Schema
 var VoteSchema = new Schema(
   {
     _id: {type: String, required: true},
-    rep: {type: Schema.ObjectId, ref: 'Rep', required: true},
-    bill: {type: Schema.ObjectId, ref: 'Bill', required: true},
+    rep: {type: String, ref: 'Rep', required: true},
+    bill: {type: String, ref: 'Bill', required: true},
     outcome: {type: String, required: true, enum: ['YES', 'NO', 'ABSENT']}
   }
 )

@@ -11,7 +11,7 @@ export class BillTitle extends Component {
   static propTypes = {
     hasBills: PropTypes.bool.isRequired,
     bill: PropTypes.shape({
-      id: PropTypes.string.isRequired,
+      _id: PropTypes.string.isRequired,
       title: PropTypes.string.isRequired,
     }),
     billId: PropTypes.string.isRequired,
@@ -31,7 +31,7 @@ export class BillTitle extends Component {
       )
     }
     return (
-      <Link to={`/bill/${bill.id}`}>{bill.title}</Link>
+      <Link to={`/bill/${bill._id}`}>{bill.title}</Link>
     )
   }
 }

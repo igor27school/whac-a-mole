@@ -14,12 +14,10 @@ export class VoteDetails extends Component {
     hasVote: PropTypes.bool.isRequired,
     voteId: PropTypes.string.isRequired,
     vote: PropTypes.shape({
-      id: PropTypes.string.isRequired,
-      billId: PropTypes.string.isRequired,
-      senatorId: PropTypes.string.isRequired,
-      resultVote: PropTypes.string.isRequired,
-      down: PropTypes.number.isRequired,
-      up: PropTypes.number.isRequired,
+      _id: PropTypes.string.isRequired,
+      bill: PropTypes.string.isRequired,
+      rep: PropTypes.string.isRequired,
+      outcome: PropTypes.string.isRequired,
     }),
     fetchVoteFromServer: PropTypes.func.isRequired,
   }
@@ -38,11 +36,11 @@ export class VoteDetails extends Component {
     }
     return (
       <div>
-        <SenatorOverview senatorId={vote.senatorId}/>
-        <BillOverview billId={vote.billId}/>
-        <h5>The vote on record is {vote.resultVote}</h5>
+        <SenatorOverview senatorId={vote.rep}/>
+        <BillOverview billId={vote.bill}/>
+        <h5>The vote on record is {vote.outcome}</h5>
         <label><input name="agreement" type="checkbox"/>I have carefully studied the evidence and have come to my decision</label>
-        <Voter id={vote.id}/>
+        <Voter id={vote._id}/>
       </div>
     )
   }

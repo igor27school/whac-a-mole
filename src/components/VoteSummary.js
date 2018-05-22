@@ -14,12 +14,10 @@ export class VoteSummary extends Component {
     hasVote: PropTypes.bool.isRequired,
     voteId: PropTypes.string.isRequired,
     vote: PropTypes.shape({
-      id: PropTypes.string.isRequired,
-      billId: PropTypes.string.isRequired,
-      senatorId: PropTypes.string.isRequired,
-      resultVote: PropTypes.string.isRequired,
-      down: PropTypes.number.isRequired,
-      up: PropTypes.number.isRequired,
+      _id: PropTypes.string.isRequired,
+      rep: PropTypes.string.isRequired,
+      bill: PropTypes.string.isRequired,
+      outcome: PropTypes.string.isRequired
     }),
     fetchVoteFromServer: PropTypes.func.isRequired,
   }
@@ -38,7 +36,8 @@ export class VoteSummary extends Component {
     }
     return (
       <div>
-        <SenatorNickname senatorId={vote.senatorId}/> voted {vote.resultVote} on <BillTitle billId={vote.billId}/> {vote.down} {vote.up} (<Link to={`/vote/${vote.id}`}>Details about the vote</Link>)
+        <SenatorNickname senatorId={vote.rep}/> voted {vote.outcome} on <BillTitle billId={vote.bill}/>
+        (<Link to={`/vote/${vote._id}`}>Details about the vote</Link>)
       </div>
     )
   }

@@ -17,7 +17,7 @@ export class BillDetails extends Component {
     const {
       hasVotes,
       billId,
-      fetchVotesForBillFromServer,
+      fetchVotesForBillFromServer
     } = this.props
     if (!hasVotes) {
       fetchVotesForBillFromServer(billId)
