@@ -17,6 +17,9 @@ export const getVotesForSenator = senatorId =>
 export const getVote = voteId =>
   fetch(`${api}/vote/${voteId}`).then(res => res.json())
 
+export const getVotePairs = (firstSenatorId, secondSenatorId) =>
+  fetch(`${api}/compare/${firstSenatorId}/${secondSenatorId}`).then(res => res.json())
+
 export const sendVote = voteId => Promise.resolve(
   {
     _id: voteId,
