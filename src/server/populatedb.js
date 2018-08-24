@@ -38,8 +38,8 @@ function repCreate(_id, name, state, cb) {
   })
 }
 
-function billCreate(_id, title, summary, cb) {
-  var bill = new Bill({_id, title, summary})
+function billCreate(_id, title, date, summary, cb) {
+  var bill = new Bill({_id, title, date, summary})
 
   bill.save(function (err) {
     if (err) {
@@ -78,7 +78,7 @@ function createRepsAndBills(cb) {
   for (let i=0; i<bills.length; i++) {
     let bill = bills[i]
     array_functions.push(function(callback) {
-      billCreate(bill['_id'], bill['title'], bill['summary'], callback)
+      billCreate(bill['_id'], bill['title'], bill['date'], bill['summary'], callback)
     })
   }
   async.parallel(array_functions, cb);

@@ -13,6 +13,7 @@ export class BillOverview extends Component {
     bill: PropTypes.shape({
       _id: PropTypes.string.isRequired,
       title: PropTypes.string.isRequired,
+      date: PropTypes.string.isRequired,
       summary: PropTypes.string.isRequired,
     }),
   }
@@ -33,9 +34,14 @@ export class BillOverview extends Component {
         <h4>The bill {billId} does not exist</h4>
       )
     }
+    const date = new Date(bill.date)
+    console.log(date.toString())
+    const formattedDate = (date.getMonth() + 1) + "/" + date.getDate() + "/" + date.getFullYear()
+    console.log(formattedDate.toString())
     return (
       <div>
         <h2>BILL: {bill.title}</h2>
+        <h3>Date: {formattedDate}</h3>
         <h3>Description: {bill.summary}</h3>
       </div>
     )
