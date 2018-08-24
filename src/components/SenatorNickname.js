@@ -31,7 +31,7 @@ export class SenatorNickname extends Component {
       )
     }
     return (
-      <Link to={`/senator/${senator._id}`}>{senator.name}</Link>
+      <Link to={`/senator/${senator._id}`}>{senator.name} ({senator._id})</Link>
     )
   }
 }

@@ -29,7 +29,12 @@ export class ListSenators extends Component {
       <div>
         <h2>SENATORS</h2>
         <ul>
-          {senators.map(senator => (
+          {senators.sort(function(s1, s2) {
+            if (s1.name > s2.name){
+              return 1
+            }
+            return -1
+          }).map(senator => (
             <li key={senator._id}>
               <SenatorNickname senatorId={senator._id}/>
             </li>
