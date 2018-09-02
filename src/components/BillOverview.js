@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import { Link } from 'react-router-dom'
 import PropTypes from 'prop-types'
 import { fetchBillFromServer } from '../actions/ActionCreators'
 
@@ -43,6 +44,7 @@ export class BillOverview extends Component {
         <h2>BILL: {bill.title}</h2>
         <h3>Date: {formattedDate}</h3>
         <h3>Description: {bill.summary}</h3>
+        <h3>Link: <Link to={`${bill.link}`} target="_blank">{bill.link}</Link></h3>
       </div>
     )
   }

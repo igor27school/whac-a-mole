@@ -7,7 +7,8 @@ var BillSchema = new Schema(
     _id: {type: String, required: true},
     title: {type: String, required: true},
     date: {type: Date, required: true},
-    summary: {type: String, required: true}
+    summary: {type: String, required: true},
+    link: {type: String, required: true}
   }
 )
 

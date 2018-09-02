@@ -24,8 +24,8 @@ mongoose.connect(mongoDB)
 var db = mongoose.connection
 mongoose.connection.on('error', console.error.bind(console, 'MongoDB connection error:'))
 
-function repCreate(_id, name, state, cb) {
-  var rep = new Rep({_id, name, state})
+function repCreate(_id, name, state, link, cb) {
+  var rep = new Rep({_id, name, state, link})
 
   rep.save(function (err) {
     if (err) {
@@ -38,8 +38,8 @@ function repCreate(_id, name, state, cb) {
   })
 }
 
-function billCreate(_id, title, date, summary, cb) {
-  var bill = new Bill({_id, title, date, summary})
+function billCreate(_id, title, date, summary, link, cb) {
+  var bill = new Bill({_id, title, date, summary, link})
 
   bill.save(function (err) {
     if (err) {
@@ -67,18 +67,18 @@ function voteCreate(_id, rep, bill, outcome, cb) {
 
 function createRepsAndBills(cb) {
   const array_functions = []
-  const reps = JSON.parse(fs.readFileSync('/tmp/reps_senate.json'))['reps']
+  const reps = JSON.parse(fs.readFileSync('/tmp/reps_senate.json'))
   for (let i=0; i<reps.length; i++) {
     let rep = reps[i]
     array_functions.push(function(callback) {
-      repCreate(rep['_id'], rep['rep_name'], rep['state'], callback)
+      repCreate(rep['_id'], rep['rep_name'], rep['state'], rep['link'], callback)
     })
   }
-  const bills = JSON.parse(fs.readFileSync('/tmp/bills_senate.json'))['bills']
+  const bills = JSON.parse(fs.readFileSync('/tmp/bills_senate.json'))
   for (let i=0; i<bills.length; i++) {
     let bill = bills[i]
     array_functions.push(function(callback) {
-      billCreate(bill['_id'], bill['title'], bill['date'], bill['summary'], callback)
+      billCreate(bill['_id'], bill['title'], bill['date'], bill['summary'], bill['link'], callback)
     })
   }
   async.parallel(array_functions, cb);
@@ -86,7 +86,7 @@ function createRepsAndBills(cb) {
 
 function createVotes(cb) {
   const array_functions = []
-  const votes = JSON.parse(fs.readFileSync('/tmp/votes_senate.json'))['votes']
+  const votes = JSON.parse(fs.readFileSync('/tmp/votes_senate.json'))
   for (let i=0; i<votes.length; i++) {
     let vote = votes[i]
     array_functions.push(function(callback) {

@@ -6,7 +6,8 @@ var RepSchema = new Schema(
   {
     _id: {type: String, required: true},
     name: {type: String, required: true},
-    state: {type: String, required: true}
+    state: {type: String, required: true},
+    link: {type: String, required: true}
   }
 )
 
