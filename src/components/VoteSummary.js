@@ -17,7 +17,9 @@ export class VoteSummary extends Component {
       _id: PropTypes.string.isRequired,
       rep: PropTypes.string.isRequired,
       bill: PropTypes.string.isRequired,
-      outcome: PropTypes.string.isRequired
+      outcome: PropTypes.string.isRequired,
+      link: PropTypes.string.isRequired,
+      url: PropTypes.string.isRequired,
     }),
     fetchVoteFromServer: PropTypes.func.isRequired,
   }
@@ -37,7 +39,7 @@ export class VoteSummary extends Component {
     return (
       <div>
         <SenatorNickname senatorId={vote.rep}/> voted {vote.outcome} on <BillTitle billId={vote.bill}/>
-        (<Link to={`/vote/${vote._id}`}>Details about the vote</Link>)
+        (<Link to={`${vote.url}`}>Details about the vote</Link>)
       </div>
     )
   }

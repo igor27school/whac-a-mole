@@ -14,13 +14,14 @@ function bills(state=initialState, action) {
           byId: {
             ...state.byId,
             [bill._id]: {
+              ...state.byId[bill._id],
               ...bill,
             }
           },
           allIds: state.allIds.concat([bill._id])
         }
       },
-      initialState,
+      state,
     )
     case ActionTypes.RECEIVE_VOTES_FOR_BILL:
       return {

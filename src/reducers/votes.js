@@ -26,13 +26,14 @@ function votes(state=initialState, action) {
           byId: {
             ...state.byId,
             [vote._id]: {
+              ...state.byId[vote._id],
               ...vote,
             }
           },
           allIds: state.allIds.concat([vote._id])
         }
       },
-      initialState,
+      state,
     )
     default:
       return state

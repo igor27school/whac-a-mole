@@ -32,7 +32,6 @@ function repCreate(_id, name, state, link, cb) {
       cb(err, null)
       return
     }
-    console.log('New Rep: ' + rep)
     reps[rep['_id']] = rep
     cb(null, rep)
   })
@@ -46,21 +45,19 @@ function billCreate(_id, title, date, summary, link, cb) {
       cb(err, null)
       return
     }
-    console.log('New Bill: ' + bill)
     bills[bill['_id']] = bill
     cb(null, bill)
   })
 }
 
-function voteCreate(_id, rep, bill, outcome, cb) {
-  var vote = new Vote({_id, rep, bill, outcome})
+function voteCreate(_id, rep, bill, outcome, link, cb) {
+  var vote = new Vote({_id, rep, bill, outcome, link})
 
   vote.save(function (err) {
     if (err) {
       cb(err, null)
       return
     }
-    console.log('New Vote: ' + vote)
     cb(null, vote)
   })
 }
@@ -90,7 +87,7 @@ function createVotes(cb) {
   for (let i=0; i<votes.length; i++) {
     let vote = votes[i]
     array_functions.push(function(callback) {
-      voteCreate(vote['_id'], reps[vote['rep_id']], bills[vote['bill_id']], vote['outcome'].toUpperCase(), callback)
+      voteCreate(vote['_id'], reps[vote['rep_id']], bills[vote['bill_id']], vote['outcome'].toUpperCase(), vote['link'], callback)
     })
   }
   async.parallel(array_functions, cb);

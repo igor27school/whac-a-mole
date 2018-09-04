@@ -14,13 +14,14 @@ function senators(state=initialState, action) {
           byId: {
             ...state.byId,
             [senator._id]: {
+              ...state.byId[senator._id],
               ...senator,
             }
           },
           allIds: state.allIds.concat([senator._id])
         }
       },
-      initialState,
+      state,
     )
     case ActionTypes.RECEIVE_VOTES_FOR_SENATOR:
       return {

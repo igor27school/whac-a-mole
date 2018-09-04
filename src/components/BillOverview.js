@@ -16,6 +16,7 @@ export class BillOverview extends Component {
       title: PropTypes.string.isRequired,
       date: PropTypes.string.isRequired,
       summary: PropTypes.string.isRequired,
+      link: PropTypes.string.isRequired,
     }),
   }
   componentDidMount() {
@@ -35,16 +36,12 @@ export class BillOverview extends Component {
         <h4>The bill {billId} does not exist</h4>
       )
     }
-    const date = new Date(bill.date)
-    console.log(date.toString())
-    const formattedDate = (date.getMonth() + 1) + "/" + date.getDate() + "/" + date.getFullYear()
-    console.log(formattedDate.toString())
     return (
       <div>
         <h2>BILL: {bill.title}</h2>
-        <h3>Date: {formattedDate}</h3>
+        <h3>Date: {bill.formattedDate}</h3>
         <h3>Description: {bill.summary}</h3>
-        <h3>Link: <Link to={`${bill.link}`} target="_blank">{bill.link}</Link></h3>
+        <h3>Bill link: <Link to={`${bill.link}`} target="_blank">{bill.link}</Link></h3>
       </div>
     )
   }

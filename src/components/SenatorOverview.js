@@ -12,9 +12,11 @@ export class SenatorOverview extends Component {
     hasSenator: PropTypes.bool.isRequired,
     senatorId: PropTypes.string.isRequired,
     senator: PropTypes.shape({
-      _id: PropTypes.string.isRequired,
-      name: PropTypes.string.isRequired,
-      state: PropTypes.string.isRequired,
+      _id: PropTypes.string,
+      name: PropTypes.string,
+      state: PropTypes.string,
+      link: PropTypes.string,
+      url: PropTypes.url,
     }),
   }
   componentDidMount() {
@@ -38,7 +40,7 @@ export class SenatorOverview extends Component {
       <div>
         <h2>SENATOR: {senator.name}</h2>
         <h3>Representing state {senator.state}</h3>
-        <h3>Link: <Link to={`${senator.link}`} target="_blank">{senator.link}</Link></h3>
+        <h3>Senator link: <Link to={`${senator.link}`} target="_blank">{senator.link}</Link></h3>
       </div>
     )
   }

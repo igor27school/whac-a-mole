@@ -13,6 +13,7 @@ export class BillSummary extends Component {
     bill: PropTypes.shape({
       _id: PropTypes.string.isRequired,
       title: PropTypes.string.isRequired,
+      url: PropTypes.string.isRequired,
     }),
     billId: PropTypes.string.isRequired,
     fetchBillFromServer: PropTypes.func.isRequired,
@@ -32,7 +33,7 @@ export class BillSummary extends Component {
     }
     return (
       <div>
-        <Link to={`/bill/${bill._id}`}>{bill.title}</Link>
+        <Link to={`${bill.url}`}>{bill.title} ({bill.formattedDate})</Link>
       </div>
     )
   }

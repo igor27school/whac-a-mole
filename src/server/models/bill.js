@@ -9,13 +9,21 @@ var BillSchema = new Schema(
     date: {type: Date, required: true},
     summary: {type: String, required: true},
     link: {type: String, required: true}
-  }
+  },
+  { toObject: { virtuals: true } }
 )
 
 BillSchema
 .virtual('url')
 .get(function () {
   return '/bill/' + this._id
+})
+
+BillSchema
+.virtual('formattedDate')
+.get(function () {
+  const date = new Date(this.date)
+  return (date.getMonth() + 1) + "/" + date.getDate() + "/" + date.getFullYear()
 })
 
 module.exports = mongoose.model('Bill', BillSchema)

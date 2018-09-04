@@ -8,7 +8,8 @@ var RepSchema = new Schema(
     name: {type: String, required: true},
     state: {type: String, required: true},
     link: {type: String, required: true}
-  }
+  },
+  { toObject: { virtuals: true } }
 )
 
 RepSchema
