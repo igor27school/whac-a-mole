@@ -29,7 +29,12 @@ export class ListBills extends Component {
       <div>
         <h2>BILLS</h2>
         <ul>
-          {bills.map(bill => (
+          {bills.sort(function(b1, b2) {
+            if (b1.date < b2.date){
+              return 1
+            }
+            return -1
+          }).map(bill => (
             <li key={bill._id}>
               <BillSummary billId={bill._id}/>
             </li>
