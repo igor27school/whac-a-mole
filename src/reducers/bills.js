@@ -21,8 +21,7 @@ function bills(state=initialState, action) {
           allIds: state.allIds.concat([bill._id])
         }
       },
-      state,
-    )
+      state)
     case ActionTypes.RECEIVE_VOTES_FOR_BILL:
       return {
         ...state,

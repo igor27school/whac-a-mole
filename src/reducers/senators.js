@@ -21,8 +21,7 @@ function senators(state=initialState, action) {
           allIds: state.allIds.concat([senator._id])
         }
       },
-      state,
-    )
+      state)
     case ActionTypes.RECEIVE_VOTES_FOR_SENATOR:
       return {
         ...state,

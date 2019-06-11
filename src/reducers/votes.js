@@ -33,8 +33,7 @@ function votes(state=initialState, action) {
           allIds: state.allIds.concat([vote._id])
         }
       },
-      state,
-    )
+      state)
     default:
       return state
   }
