@@ -20,6 +20,14 @@ router.get('/reps', function(req, res) {
   })
 })
 
+router.get('/users', function(req, res) {
+  User.find(function(err, users) {
+    if (err)
+      res.send(err)
+    res.json(users)
+  })
+})
+
 router.get('/bills', function(req, res) {
   Bill.find(function(err, bills) {
     if (err)

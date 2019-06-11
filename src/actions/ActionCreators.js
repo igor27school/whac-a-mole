@@ -60,3 +60,10 @@ export function vote(id, voteType) {
 export function receiveUserInfo(user) {
   return dispatch =>  ServerAPI.sendUserInfo(user).catch(err => console.error(err))
 }
+
+export function fetchUsersFromServer() {
+  return dispatch => ServerAPI.getUsers().then(users => {
+      dispatch(Actions.receiveUsers(users))
+      return users
+  }).catch(err => console.error(err))
+}

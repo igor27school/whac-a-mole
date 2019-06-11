@@ -6,6 +6,7 @@ import SenatorDetails from './SenatorDetails'
 import VoteDetails from './VoteDetails'
 import CompareVotes from './CompareVotes'
 import Facebook from './Facebook'
+import ListUsers from './ListUsers'
 
 class App extends Component {
   render() {
@@ -18,6 +19,7 @@ class App extends Component {
           <Route path="/senator/:senator_id" component={SenatorDetails}/>
           <Route path="/vote/:vote_id" component={VoteDetails}/>
           <Route path="/compare/:first_senator_id/:second_senator_id" component={CompareVotes}/>
+          <Route path="/users" component={ListUsers}/>
         </Switch>
       </div>
     )
