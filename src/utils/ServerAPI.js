@@ -30,3 +30,12 @@ export const sendVote = voteId => Promise.resolve(
     up: 0,
   }
 )
+
+export const sendUserInfo = user =>
+  fetch(`${api}/user`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(user)
+  }).then(res => res.json())

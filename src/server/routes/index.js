@@ -5,6 +5,7 @@ var url = require('url')
 var Rep = require('../models/Rep')
 var Bill = require('../models/Bill')
 var Vote = require('../models/Vote')
+var User = require('../models/User')
 
 // GET home page.
 router.get('/', function(req, res) {
@@ -90,6 +91,21 @@ router.get('/compare/:firstSenatorId/:secondSenatorId', function(req, res) {
     }
     res.json(votePairs)
   }).catch(err => res.send(err))
+})
+
+router.post('/user', function(req, res) {
+  var user = new User(
+    {
+      _id: req.body.userId,
+      name: req.body.name,
+      picture: req.body.picture
+    })
+  user.save(function (err) {
+    if (err) {
+      console.error(err)
+      return
+    }
+  })
 })
 
 module.exports = router;
