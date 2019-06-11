@@ -3,6 +3,7 @@ import { Switch, Route } from 'react-router-dom'
 import ListBillsAndSenators from './ListBillsAndSenators'
 import BillDetails from './BillDetails'
 import SenatorDetails from './SenatorDetails'
+import UserDetails from './UserDetails'
 import VoteDetails from './VoteDetails'
 import CompareVotes from './CompareVotes'
 import Facebook from './Facebook'
@@ -20,6 +21,7 @@ class App extends Component {
           <Route path="/vote/:vote_id" component={VoteDetails}/>
           <Route path="/compare/:first_senator_id/:second_senator_id" component={CompareVotes}/>
           <Route path="/users" component={ListUsers}/>
+          <Route path="/user/:user_id" component={UserDetails}/>
         </Switch>
       </div>
     )

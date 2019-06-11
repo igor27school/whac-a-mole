@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import { Link } from 'react-router-dom'
 import PropTypes from 'prop-types'
 import { fetchUsersFromServer } from '../actions/ActionCreators'
 
@@ -43,7 +44,8 @@ export class ListUsers extends Component {
                 background: '#f4f4f4',
                 padding: '20px'
               }}>
-                <img src={user.picture} alt={user.name} />{user.name}
+                <img src={user.picture} alt={user.name} />
+                <Link to={`${user.url}`} target="_blank">{user.name}</Link>
               </div>
             </li>
           ))}

@@ -10,6 +10,11 @@ export const receiveSenators = senators => ({
   senators,
 })
 
+export const receiveUser = user => ({
+  type: types.RECEIVE_USER,
+  user,
+})
+
 export const receiveUsers = users => ({
   type: types.RECEIVE_USERS,
   users,

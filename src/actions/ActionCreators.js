@@ -31,6 +31,13 @@ export function fetchSenatorFromServer(senatorId) {
   }).catch(err => console.error(err))
 }
 
+export function fetchUserFromServer(userId) {
+  return dispatch => ServerAPI.getUser(userId).then(user => {
+      dispatch(Actions.receiveUser(user))
+      return user
+  }).catch(err => console.error(err))
+}
+
 export function fetchVotesForBillFromServer(billId) {
   return dispatch => ServerAPI.getVotesForBill(billId).then(votes => {
       dispatch(Actions.receiveVotesForBill(billId, votes))

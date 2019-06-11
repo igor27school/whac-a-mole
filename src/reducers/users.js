@@ -7,6 +7,17 @@ const initialState = {
 
 function users(state=initialState, action) {
   switch(action.type) {
+    case ActionTypes.RECEIVE_USER:
+      return {
+        ...state,
+        byId: {
+          ...state.byId,
+          [action.user._id]: {
+            ...action.user,
+          }
+        },
+        allIds: state.allIds.concat([action.user._id])
+      }
     case ActionTypes.RECEIVE_USERS:
       return action.users.reduce((state, user) => {
         return {
