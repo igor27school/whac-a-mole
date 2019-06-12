@@ -11,8 +11,9 @@ export class SenatorNickname extends Component {
   static propTypes = {
     hasSenators: PropTypes.bool.isRequired,
     senator: PropTypes.shape({
-      _id: PropTypes.string,
-      name: PropTypes.string,
+      _id: PropTypes.string.isRequired,
+      name: PropTypes.string.isRequired,
+      url: PropTypes.string.isRequired,
     }),
     senatorId: PropTypes.string.isRequired,
     fetchSenatorFromServer: PropTypes.func.isRequired,

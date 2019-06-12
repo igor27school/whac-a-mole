@@ -18,7 +18,8 @@ export class VoteDifference extends Component {
       _id: PropTypes.string.isRequired,
       rep: PropTypes.string.isRequired,
       bill: PropTypes.string.isRequired,
-      outcome: PropTypes.string.isRequired
+      outcome: PropTypes.string.isRequired,
+      url: PropTypes.string.isRequired,
     }),
     hasSecondVote: PropTypes.bool.isRequired,
     secondVoteId: PropTypes.string.isRequired,
@@ -26,7 +27,8 @@ export class VoteDifference extends Component {
       _id: PropTypes.string.isRequired,
       rep: PropTypes.string.isRequired,
       bill: PropTypes.string.isRequired,
-      outcome: PropTypes.string.isRequired
+      outcome: PropTypes.string.isRequired,
+      url: PropTypes.string.isRequired,
     }),
     fetchVoteFromServer: PropTypes.func.isRequired,
   }
@@ -54,7 +56,7 @@ export class VoteDifference extends Component {
     return (
       <div>
         On <BillTitle billId={bill}/>
-        <SenatorNickname senatorId={firstVote.rep}/> voted {firstVote.outcome}(<Link to={`/vote/${firstVote._id}`}>details</Link>), but <SenatorNickname senatorId={secondVote.rep}/> voted {secondVote.outcome}(<Link to={`/vote/${secondVote._id}`}>details</Link>)
+        <SenatorNickname senatorId={firstVote.rep}/> voted {firstVote.outcome}(<Link to={firstVote.url}>details</Link>), but <SenatorNickname senatorId={secondVote.rep}/> voted {secondVote.outcome}(<Link to={secondVote.url}>details</Link>)
       </div>
     )
   }
