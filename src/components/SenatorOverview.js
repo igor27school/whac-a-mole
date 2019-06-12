@@ -46,7 +46,7 @@ export class SenatorOverview extends Component {
   }
 }
 
-function mapStateToProps ({ senators, votes }, { senatorId }) {
+function mapStateToProps ({ senators }, { senatorId }) {
   const senator = senators.byId[senatorId]
   return {
     senator,
