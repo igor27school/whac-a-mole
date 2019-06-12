@@ -1,5 +1,3 @@
-import { YES } from '../constants/ResultVotes'
-
 const api = 'http://localhost:3001'
 
 export const getBills = () =>
@@ -26,16 +24,14 @@ export const getVote = voteId =>
 export const getVotePairs = (firstSenatorId, secondSenatorId) =>
   fetch(`${api}/compare/${firstSenatorId}/${secondSenatorId}`).then(res => res.json())
 
-export const sendVote = voteId => Promise.resolve(
-  {
-    _id: voteId,
-    senatorId: 'senator1',
-    billId: 'bill1',
-    resultVote: YES,
-    down: 0,
-    up: 0,
-  }
-)
+export const sendUserVote = (voteId, userId, voteType) =>
+  fetch(`${api}/userVote`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({voteId, userId, voteType})
+  }).then(res => res.json())
 
 export const sendUserInfo = user =>
   fetch(`${api}/user`, {

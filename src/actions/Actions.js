@@ -44,8 +44,9 @@ export const receiveVotePairs = (firstSenatorId, secondSenatorId, votePairs) => 
   votePairs,
 })
 
-export const modifyVote = (id, voteType) => ({
+export const modifyVote = (voteId, userId, voteType) => ({
   type: types.MODIFY_VOTE,
-  id,
+  voteId,
+  userId,
   voteType,
 })

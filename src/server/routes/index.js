@@ -6,6 +6,7 @@ var Rep = require('../models/Rep')
 var Bill = require('../models/Bill')
 var Vote = require('../models/Vote')
 var User = require('../models/User')
+var UserVote = require('../models/UserVote')
 
 // GET home page.
 router.get('/', function(req, res) {
@@ -117,6 +118,21 @@ router.post('/user', function(req, res) {
       picture: req.body.picture
     })
   user.save(function (err) {
+    if (err) {
+      console.error(err)
+      return
+    }
+  })
+})
+
+router.post('/userVote', function(req, res) {
+  var userVote = new UserVote(
+    {
+      voteId: req.body.voteId,
+      userId: req.body.userId,
+      voteType: req.body.voteType
+    })
+  userVote.save(function (err) {
     if (err) {
       console.error(err)
       return

@@ -14,10 +14,11 @@ export class Voter extends Component {
   }
   render() {
     const {id, vote} = this.props
+    const userId = JSON.parse(sessionStorage.getItem('user')).userId
     return (
       <span>
-        <button onClick={(event) => vote(id, VOTE_UP)}>UPVOTE</button>
-        <button onClick={(event) => vote(id, VOTE_DOWN)}>DOWNVOTE</button>
+        <button onClick={(event) => vote(id, userId, VOTE_UP)}>UPVOTE</button>
+        <button onClick={(event) => vote(id, userId, VOTE_DOWN)}>DOWNVOTE</button>
       </span>
     )
   }
@@ -25,7 +26,7 @@ export class Voter extends Component {
 
 function mapDispatchToProps (dispatch) {
   return {
-    vote: (id, voteType) => dispatch(vote(id, voteType)),
+    vote: (voteId, userId, voteType) => dispatch(vote(voteId, userId, voteType)),
   }
 }
 
