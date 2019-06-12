@@ -34,7 +34,7 @@ export class SenatorDetails extends Component {
   }
 }
 
-function mapStateToProps ({ senators, votes }, { match }) {
+function mapStateToProps ({ senators }, { match }) {
   const senatorId = match.params.senator_id
   const senator = senators.byId[senatorId]
   return {
