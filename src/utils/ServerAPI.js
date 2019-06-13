@@ -24,13 +24,13 @@ export const getVote = voteId =>
 export const getVotePairs = (firstSenatorId, secondSenatorId) =>
   fetch(`${api}/compare/${firstSenatorId}/${secondSenatorId}`).then(res => res.json())
 
-export const sendUserVote = (voteId, userId, voteType) =>
-  fetch(`${api}/userVote`, {
+export const sendUserMark = (voteId, userId, markType) =>
+  fetch(`${api}/userMark`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
     },
-    body: JSON.stringify({voteId, userId, voteType})
+    body: JSON.stringify({voteId, userId, markType})
   }).then(res => res.json())
 
 export const sendUserInfo = user =>
@@ -42,8 +42,8 @@ export const sendUserInfo = user =>
     body: JSON.stringify(user)
   }).then(res => res.json())
 
-export const getVotesForUser = userId =>
-  fetch(`${api}/userVotes?userId=${userId}`).then(res => res.json())
+export const getMarksForUser = userId =>
+  fetch(`${api}/userMarks?userId=${userId}`).then(res => res.json())
 
-export const getUserVotesForVote = voteId =>
-  fetch(`${api}/userVotes?voteId=${voteId}`).then(res => res.json())
+export const getUserMarksForVote = voteId =>
+  fetch(`${api}/userMarks?voteId=${voteId}`).then(res => res.json())

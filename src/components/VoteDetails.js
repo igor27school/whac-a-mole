@@ -5,7 +5,7 @@ import PropTypes from 'prop-types'
 import { fetchVoteFromServer } from '../actions/ActionCreators'
 import BillOverview from './BillOverview'
 import SenatorOverview from './SenatorOverview'
-import Voter from './Voter'
+import Marker from './Marker'
 
 /**
 * @description This component displays all the information releavant to a particular vote.
@@ -43,7 +43,7 @@ export class VoteDetails extends Component {
         <h3>Vote link: <Link to={`${vote.link}`} target="_blank">{vote.link}</Link></h3>
         <h5>The vote on record is {vote.outcome}</h5>
         <label><input name="agreement" type="checkbox"/>I have carefully studied the evidence and have come to my decision</label>
-        <Voter id={vote._id}/>
+        <Marker id={vote._id}/>
       </div>
     )
   }

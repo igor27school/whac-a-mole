@@ -5,7 +5,7 @@ import PropTypes from 'prop-types'
 import { fetchVoteFromServer } from '../actions/ActionCreators'
 import BillTitle from './BillTitle'
 import SenatorNickname from './SenatorNickname'
-import UserVotesForVote from './UserVotesForVote'
+import UserMarksForVote from './UserMarksForVote'
 
 /**
 * @description This component is used in BillDetails view. It displays the information releavant to a particular vote.
@@ -39,7 +39,7 @@ export class VoteSummary extends Component {
     }
     return (
       <div>
-        <SenatorNickname senatorId={vote.rep}/> voted {vote.outcome} on <BillTitle billId={vote.bill}/><UserVotesForVote voteId={voteId}/>
+        <SenatorNickname senatorId={vote.rep}/> voted {vote.outcome} on <BillTitle billId={vote.bill}/><UserMarksForVote voteId={voteId}/>
         (<Link to={`${vote.url}`}>Details about the vote</Link>)
       </div>
     )

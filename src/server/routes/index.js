@@ -6,7 +6,7 @@ var Rep = require('../models/Rep')
 var Bill = require('../models/Bill')
 var Vote = require('../models/Vote')
 var User = require('../models/User')
-var UserVote = require('../models/UserVote')
+var UserMark = require('../models/UserMark')
 
 // GET home page.
 router.get('/', function(req, res) {
@@ -125,31 +125,31 @@ router.post('/user', function(req, res) {
   })
 })
 
-router.post('/userVote', function(req, res) {
+router.post('/userMark', function(req, res) {
   const id = req.body.userId.concat(req.body.voteId)
-  var userVote = new UserVote(
+  var userMark =
     {
       _id: id,
       vote: req.body.voteId,
       user: req.body.userId,
-      voteType: req.body.voteType
-    })
+      markType: req.body.markType
+    }
   return new Promise(function (resolve, reject) {
-    UserVote.update(
+    UserMark.update(
       { _id: id},
-      userVote,
+      userMark,
       { upsert: true },
-      function(err, userVote) {
+      function(err, userMark) {
       if (err) {
         reject(err)
       } else {
-        resolve(userVote)
+        resolve(userMark)
       }
     })
   })
 })
 
-function getUserVotes(voteId, userId, voteType) {
+function getUserMarks(voteId, userId, markType) {
   var searchQuery = {}
   if (voteId) {
     searchQuery['vote'] = voteId
@@ -157,11 +157,11 @@ function getUserVotes(voteId, userId, voteType) {
   if (userId) {
     searchQuery['user'] = userId
   }
-  if (voteType) {
-    searchQuery['voteType'] = voteType
+  if (markType) {
+    searchQuery['markType'] = markType
   }
   return new Promise(function (resolve, reject) {
-    UserVote.find(searchQuery, function(err, votes) {
+    UserMark.find(searchQuery, function(err, votes) {
       if (err) {
         reject(err)
       } else {
@@ -171,12 +171,12 @@ function getUserVotes(voteId, userId, voteType) {
   })
 }
 
-router.get('/userVotes', function(req, res) {
+router.get('/userMarks', function(req, res) {
   var q = url.parse(req.url, true).query;
   Promise.all([
-    getUserVotes(q.voteId, q.userId, 'VOTE_UP'),
-    getUserVotes(q.voteId, q.userId, 'VOTE_DOWN'),
-  ]).then(bothVotes => res.json(bothVotes)).catch(err => res.send(err))
+    getUserMarks(q.voteId, q.userId, 'MARK_UP'),
+    getUserMarks(q.voteId, q.userId, 'MARK_DOWN'),
+  ]).then(bothMarks => res.json(bothMarks)).catch(err => res.send(err))
 })
 
 module.exports = router;

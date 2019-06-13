@@ -32,18 +32,18 @@ export const receiveVotesForSenator = (senatorId, votes) => ({
   votes,
 })
 
-export const receiveVotesForUser = (userId, upVotes, downVotes) => ({
-  type: types.RECEIVE_VOTES_FOR_USER,
+export const receiveMarksForUser = (userId, upMarks, downMarks) => ({
+  type: types.RECEIVE_MARKS_FOR_USER,
   userId,
-  upVotes,
-  downVotes,
+  upMarks,
+  downMarks,
 })
 
-export const receiveUserVotesForVote = (voteId, upVotes, downVotes) => ({
-  type: types.RECEIVE_USER_VOTES_FOR_VOTE,
+export const receiveUserMarksForVote = (voteId, upMarks, downMarks) => ({
+  type: types.RECEIVE_USER_MARKS_FOR_VOTE,
   voteId,
-  upVotes,
-  downVotes,
+  upMarks,
+  downMarks,
 })
 
 export const receiveVote = vote => ({
@@ -58,9 +58,10 @@ export const receiveVotePairs = (firstSenatorId, secondSenatorId, votePairs) => 
   votePairs,
 })
 
-export const modifyVote = (voteId, userId, voteType) => ({
-  type: types.MODIFY_VOTE,
+// Not currently looked for in reducer
+export const modifyUserMark = (voteId, userId, markType) => ({
+  type: types.MODIFY_USER_MARK,
   voteId,
   userId,
-  voteType,
+  markType,
 })

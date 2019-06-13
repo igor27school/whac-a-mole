@@ -49,8 +49,8 @@ export function fetchVotesForSenatorFromServer(senatorId) {
   return dispatch => ServerAPI.getVotesForSenator(senatorId).then(votes => dispatch(Actions.receiveVotesForSenator(senatorId, votes))).catch(err => console.error(err))
 }
 
-export function fetchVotesForUserFromServer(userId) {
-  return dispatch => ServerAPI.getVotesForUser(userId).then(bothVotes => dispatch(Actions.receiveVotesForUser(userId, bothVotes[0], bothVotes[1]))).catch(err => console.error(err))
+export function fetchMarksForUserFromServer(userId) {
+  return dispatch => ServerAPI.getMarksForUser(userId).then(bothMarks => dispatch(Actions.receiveMarksForUser(userId, bothMarks[0], bothMarks[1]))).catch(err => console.error(err))
 }
 
 export function fetchVoteFromServer(voteId) {
@@ -64,8 +64,8 @@ export function fetchVotePairsFromServer(firstSenatorId, secondSenatorId) {
   return dispatch => ServerAPI.getVotePairs(firstSenatorId, secondSenatorId).then(votePairs => dispatch(Actions.receiveVotePairs(firstSenatorId, secondSenatorId, votePairs))).catch(err => console.error(err))
 }
 
-export function vote(voteId, userId, voteType) {
-  return dispatch => ServerAPI.sendUserVote(voteId, userId, voteType).then(() => dispatch(Actions.modifyVote(voteId, userId, voteType))).catch(err => console.error(err))
+export function mark(voteId, userId, markType) {
+  return dispatch => ServerAPI.sendUserMark(voteId, userId, markType).then(() => dispatch(Actions.modifyUserMark(voteId, userId, markType))).catch(err => console.error(err))
 }
 
 export function receiveUserInfo(user) {
@@ -79,6 +79,6 @@ export function fetchUsersFromServer() {
   }).catch(err => console.error(err))
 }
 
-export function fetchUserVotesForVote(voteId) {
-  return dispatch => ServerAPI.getUserVotesForVote(voteId).then(bothVotes => dispatch(Actions.receiveUserVotesForVote(voteId, bothVotes[0], bothVotes[1]))).catch(err => console.error(err))
+export function fetchUserMarksForVoteFromServer(voteId) {
+  return dispatch => ServerAPI.getUserMarksForVote(voteId).then(bothMarks => dispatch(Actions.receiveUserMarksForVote(voteId, bothMarks[0], bothMarks[1]))).catch(err => console.error(err))
 }

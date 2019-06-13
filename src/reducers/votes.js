@@ -18,15 +18,15 @@ function votes(state=initialState, action) {
         },
         allIds: state.allIds.concat([action.vote._id])
       }
-    case ActionTypes.RECEIVE_USER_VOTES_FOR_VOTE:
+    case ActionTypes.RECEIVE_USER_MARKS_FOR_VOTE:
       return {
         ...state,
         byId: {
           ...state.byId,
           [action.voteId]: {
             ...state.byId[action.voteId],
-            upVotes: action.upVotes.map(userVote => userVote._id),
-            downVotes: action.downVotes.map(userVote => userVote._id),
+            upMarks: action.upMarks.map(userMark => userMark._id),
+            downMarks: action.downMarks.map(userMark => userMark._id),
           },
         },
       }

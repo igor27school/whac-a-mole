@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
-import { fetchVotesForUserFromServer } from '../actions/ActionCreators'
+import { fetchMarksForUserFromServer } from '../actions/ActionCreators'
 import UserOverview from './UserOverview'
 import ListVotes from './ListVotes'
 
@@ -17,21 +17,21 @@ export class UserDetails extends Component {
     const {
       hasVotes,
       userId,
-      fetchVotesForUserFromServer,
+      fetchMarksForUserFromServer,
     } = this.props
     if (!hasVotes) {
-      fetchVotesForUserFromServer(userId)
+      fetchMarksForUserFromServer(userId)
     }
   }
   render() {
-    const { userId, upVotes, downVotes } = this.props
+    const { userId, upMarks, downMarks } = this.props
     return (
       <div>
         <UserOverview userId={userId}/>
         <h2>DEEMED CONSISTENT</h2>
-        <ListVotes votes={upVotes}/>
+        <ListVotes votes={upMarks}/>
         <h2>DEEMED INCONSISTENT</h2>
-        <ListVotes votes={downVotes}/>
+        <ListVotes votes={downMarks}/>
       </div>
     )
   }
@@ -42,15 +42,15 @@ function mapStateToProps ({ users }, { match }) {
   const user = users.byId[userId]
   return {
     userId,
-    hasVotes: user && user.upVotes && user.downVotes ? true : false,
-    upVotes: user && user.upVotes ? user.upVotes : [],
-    downVotes: user && user.downVotes ? user.downVotes : [],
+    hasMarks: user && user.upMarks && user.downMarks ? true : false,
+    upMarks: user && user.upMarks ? user.upMarks : [],
+    downMarks: user && user.downMarks ? user.downMarks : [],
   }
 }
 
 function mapDispatchToProps (dispatch) {
   return {
-    fetchVotesForUserFromServer: userId => dispatch(fetchVotesForUserFromServer(userId)),
+    fetchMarksForUserFromServer: userId => dispatch(fetchMarksForUserFromServer(userId)),
   }
 }
 
