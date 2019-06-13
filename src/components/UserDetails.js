@@ -1,41 +1,37 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
-import { fetchUserFromServer } from '../actions/ActionCreators'
+import { fetchVotesForUserFromServer } from '../actions/ActionCreators'
+import UserOverview from './UserOverview'
+import ListVotes from './ListVotes'
 
 /**
 * @description Displays information of a particular user.
 */
 export class UserDetails extends Component {
   static propTypes = {
+    hasVotes: PropTypes.bool.isRequired,
     userId: PropTypes.string.isRequired,
-    user: PropTypes.shape({
-      _id: PropTypes.string.isRequired,
-      name: PropTypes.string.isRequired,
-      picture: PropTypes.string.isRequired,
-      url: PropTypes.string.isRequired,
-    })
   }
   componentDidMount() {
     const {
-      user,
+      hasVotes,
       userId,
-      fetchUserFromServer,
+      fetchVotesForUserFromServer,
     } = this.props
-    if (!user) {
-      fetchUserFromServer(userId)
+    if (!hasVotes) {
+      fetchVotesForUserFromServer(userId)
     }
   }
   render() {
-    const { user, userId } = this.props
-    if (!user) {
-      return (
-        <h4>The user {userId} does not exist</h4>
-      )
-    }
+    const { userId, upVotes, downVotes } = this.props
     return (
       <div>
-        <img src={user.picture} alt={user.name} />{user.name}
+        <UserOverview userId={userId}/>
+        <h2>DEEMED CONSISTENT</h2>
+        <ListVotes votes={upVotes}/>
+        <h2>DEEMED INCONSISTENT</h2>
+        <ListVotes votes={downVotes}/>
       </div>
     )
   }
@@ -46,13 +42,15 @@ function mapStateToProps ({ users }, { match }) {
   const user = users.byId[userId]
   return {
     userId,
-    user,
+    hasVotes: user && user.upVotes && user.downVotes ? true : false,
+    upVotes: user && user.upVotes ? user.upVotes : [],
+    downVotes: user && user.downVotes ? user.downVotes : [],
   }
 }
 
 function mapDispatchToProps (dispatch) {
   return {
-    fetchUserFromServer: userId => dispatch(fetchUserFromServer(userId)),
+    fetchVotesForUserFromServer: userId => dispatch(fetchVotesForUserFromServer(userId)),
   }
 }
 

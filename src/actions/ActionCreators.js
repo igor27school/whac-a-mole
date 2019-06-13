@@ -49,6 +49,10 @@ export function fetchVotesForSenatorFromServer(senatorId) {
   return dispatch => ServerAPI.getVotesForSenator(senatorId).then(votes => dispatch(Actions.receiveVotesForSenator(senatorId, votes))).catch(err => console.error(err))
 }
 
+export function fetchVotesForUserFromServer(userId) {
+  return dispatch => ServerAPI.getVotesForUser(userId).then(bothVotes => dispatch(Actions.receiveVotesForUser(userId, bothVotes[0], bothVotes[1]))).catch(err => console.error(err))
+}
+
 export function fetchVoteFromServer(voteId) {
   return dispatch => ServerAPI.getVote(voteId).then(vote => {
     dispatch(Actions.receiveVote(vote))

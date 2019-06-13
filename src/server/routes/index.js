@@ -128,8 +128,8 @@ router.post('/user', function(req, res) {
 router.post('/userVote', function(req, res) {
   var userVote = new UserVote(
     {
-      voteId: req.body.voteId,
-      userId: req.body.userId,
+      vote: req.body.voteId,
+      user: req.body.userId,
       voteType: req.body.voteType
     })
   userVote.save(function (err) {
@@ -138,6 +138,36 @@ router.post('/userVote', function(req, res) {
       return
     }
   })
+})
+
+function getUserVotes(voteId, userId, voteType) {
+  var searchQuery = {}
+  if (voteId) {
+    searchQuery['vote'] = voteId
+  }
+  if (userId) {
+    searchQuery['user'] = userId
+  }
+  if (voteType) {
+    searchQuery['voteType'] = voteType
+  }
+  return new Promise(function (resolve, reject) {
+    UserVote.find(searchQuery, function(err, votes) {
+      if (err) {
+        reject(err)
+      } else {
+        resolve(votes)
+      }
+    })
+  })
+}
+
+router.get('/userVotes', function(req, res) {
+  var q = url.parse(req.url, true).query;
+  Promise.all([
+    getUserVotes(null, q.userId, 'VOTE_UP'),
+    getUserVotes(null, q.userId, 'VOTE_DOWN'),
+  ]).then(bothVotes => res.json(bothVotes)).catch(err => res.send(err))
 })
 
 module.exports = router;

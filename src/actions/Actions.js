@@ -32,6 +32,13 @@ export const receiveVotesForSenator = (senatorId, votes) => ({
   votes,
 })
 
+export const receiveVotesForUser = (userId, upVotes, downVotes) => ({
+  type: types.RECEIVE_VOTES_FOR_USER,
+  userId,
+  upVotes,
+  downVotes,
+})
+
 export const receiveVote = vote => ({
   type: types.RECEIVE_VOTE,
   vote,
