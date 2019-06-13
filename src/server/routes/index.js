@@ -127,17 +127,15 @@ router.post('/user', function(req, res) {
 
 router.post('/userMark', function(req, res) {
   const id = req.body.userId.concat(req.body.voteId)
-  var userMark =
-    {
-      _id: id,
-      vote: req.body.voteId,
-      user: req.body.userId,
-      markType: req.body.markType
-    }
   return new Promise(function (resolve, reject) {
     UserMark.update(
       { _id: id},
-      userMark,
+      {
+        _id: id,
+        vote: req.body.voteId,
+        user: req.body.userId,
+        markType: req.body.markType
+      },
       { upsert: true },
       function(err, userMark) {
       if (err) {
