@@ -165,8 +165,8 @@ function getUserVotes(voteId, userId, voteType) {
 router.get('/userVotes', function(req, res) {
   var q = url.parse(req.url, true).query;
   Promise.all([
-    getUserVotes(null, q.userId, 'VOTE_UP'),
-    getUserVotes(null, q.userId, 'VOTE_DOWN'),
+    getUserVotes(q.voteId, q.userId, 'VOTE_UP'),
+    getUserVotes(q.voteId, q.userId, 'VOTE_DOWN'),
   ]).then(bothVotes => res.json(bothVotes)).catch(err => res.send(err))
 })
 

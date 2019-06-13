@@ -39,6 +39,13 @@ export const receiveVotesForUser = (userId, upVotes, downVotes) => ({
   downVotes,
 })
 
+export const receiveUserVotesForVote = (voteId, upVotes, downVotes) => ({
+  type: types.RECEIVE_USER_VOTES_FOR_VOTE,
+  voteId,
+  upVotes,
+  downVotes,
+})
+
 export const receiveVote = vote => ({
   type: types.RECEIVE_VOTE,
   vote,

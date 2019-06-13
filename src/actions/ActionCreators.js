@@ -78,3 +78,7 @@ export function fetchUsersFromServer() {
       return users
   }).catch(err => console.error(err))
 }
+
+export function fetchUserVotesForVote(voteId) {
+  return dispatch => ServerAPI.getUserVotesForVote(voteId).then(bothVotes => dispatch(Actions.receiveUserVotesForVote(voteId, bothVotes[0], bothVotes[1]))).catch(err => console.error(err))
+}

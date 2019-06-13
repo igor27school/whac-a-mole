@@ -44,3 +44,6 @@ export const sendUserInfo = user =>
 
 export const getVotesForUser = userId =>
   fetch(`${api}/userVotes?userId=${userId}`).then(res => res.json())
+
+export const getUserVotesForVote = voteId =>
+  fetch(`${api}/userVotes?voteId=${voteId}`).then(res => res.json())
