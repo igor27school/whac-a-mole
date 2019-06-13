@@ -126,17 +126,26 @@ router.post('/user', function(req, res) {
 })
 
 router.post('/userVote', function(req, res) {
+  const id = req.body.userId.concat(req.body.voteId)
   var userVote = new UserVote(
     {
+      _id: id,
       vote: req.body.voteId,
       user: req.body.userId,
       voteType: req.body.voteType
     })
-  userVote.save(function (err) {
-    if (err) {
-      console.error(err)
-      return
-    }
+  return new Promise(function (resolve, reject) {
+    UserVote.update(
+      { _id: id},
+      userVote,
+      { upsert: true },
+      function(err, userVote) {
+      if (err) {
+        reject(err)
+      } else {
+        resolve(userVote)
+      }
+    })
   })
 })
 

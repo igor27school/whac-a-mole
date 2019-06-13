@@ -4,6 +4,7 @@ var Schema = mongoose.Schema
 
 var UserVoteSchema = new Schema(
   {
+    _id: {type: String, required: true},
     vote: {type: String, ref: 'Vote', required: true},
     user: {type: String, ref: 'User', required: true},
     voteType: {type: String, required: true, enum: ['VOTE_UP', 'VOTE_DOWN']},
