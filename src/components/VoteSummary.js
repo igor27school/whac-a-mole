@@ -3,12 +3,12 @@ import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import PropTypes from 'prop-types'
 import { fetchVoteFromServer } from '../actions/ActionCreators'
-import BillTitle from './BillTitle'
+import TallyTitle from './TallyTitle'
 import SenatorNickname from './SenatorNickname'
 import UserMarksForVote from './UserMarksForVote'
 
 /**
-* @description This component is used in BillDetails view. It displays the information releavant to a particular vote.
+* @description This component displays the information releavant to a particular vote.
 */
 export class VoteSummary extends Component {
   static propTypes = {
@@ -17,7 +17,7 @@ export class VoteSummary extends Component {
     vote: PropTypes.shape({
       _id: PropTypes.string.isRequired,
       rep: PropTypes.string.isRequired,
-      bill: PropTypes.string.isRequired,
+      tally: PropTypes.string.isRequired,
       outcome: PropTypes.string.isRequired,
       link: PropTypes.string.isRequired,
       url: PropTypes.string.isRequired,
@@ -39,7 +39,7 @@ export class VoteSummary extends Component {
     }
     return (
       <div>
-        <SenatorNickname senatorId={vote.rep}/> voted {vote.outcome} on <BillTitle billId={vote.bill}/><UserMarksForVote voteId={voteId}/>
+        <SenatorNickname senatorId={vote.rep}/> voted {vote.outcome} on <TallyTitle tallyId={vote.tally}/><UserMarksForVote voteId={voteId}/>
         (<Link to={`${vote.url}`}>Details about the vote</Link>)
       </div>
     )
@@ -55,7 +55,7 @@ function mapStateToProps ({ votes }, { voteId }) {
 
 function mapDispatchToProps (dispatch) {
   return {
-    fetchVoteFromServer: (billId) => dispatch(fetchVoteFromServer(billId)),
+    fetchVoteFromServer: (tallyId) => dispatch(fetchVoteFromServer(tallyId)),
   }
 }
 

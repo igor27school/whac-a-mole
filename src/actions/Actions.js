@@ -1,8 +1,8 @@
 import * as types from '../constants/ActionTypes'
 
-export const receiveBills = bills => ({
-  type: types.RECEIVE_BILLS,
-  bills,
+export const receiveTallies = tallies => ({
+  type: types.RECEIVE_TALLIES,
+  tallies,
 })
 
 export const receiveSenators = senators => ({
@@ -20,9 +20,9 @@ export const receiveUsers = users => ({
   users,
 })
 
-export const receiveVotesForBill = (billId, votes) => ({
+export const receiveVotesForTally = (tallyId, votes) => ({
   type: types.RECEIVE_VOTES_FOR_BILL,
-  billId,
+  tallyId,
   votes,
 })
 

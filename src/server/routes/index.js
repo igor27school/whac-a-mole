@@ -3,7 +3,7 @@ var express = require('express')
 var router = express.Router()
 var url = require('url')
 var Rep = require('../models/Rep')
-var Bill = require('../models/Bill')
+var Tally = require('../models/Tally')
 var Vote = require('../models/Vote')
 var User = require('../models/User')
 var UserMark = require('../models/UserMark')
@@ -37,18 +37,18 @@ router.get('/users', function(req, res) {
   })
 })
 
-router.get('/bills', function(req, res) {
-  Bill.find(function(err, bills) {
+router.get('/tallies', function(req, res) {
+  Tally.find(function(err, tallies) {
     if (err)
       res.send(err)
-    res.json(bills)
+    res.json(tallies)
   })
 })
 
-function getVotes(billId, repId) {
+function getVotes(tallyId, repId) {
   var searchQuery = {}
-  if (billId) {
-    searchQuery['bill'] = billId
+  if (tallyId) {
+    searchQuery['tally'] = tallyId
   }
   if (repId) {
     searchQuery['rep'] = repId
@@ -66,7 +66,7 @@ function getVotes(billId, repId) {
 
 router.get('/votes', function(req, res) {
   var q = url.parse(req.url, true).query;
-  getVotes(q.billId, q.repId)
+  getVotes(q.tallyId, q.repId)
       .then(votes => res.json(votes))
       .catch(err => res.send(err))
 })
@@ -86,21 +86,21 @@ router.get('/compare/:firstSenatorId/:secondSenatorId', function(req, res) {
   ]).then(function (bothVotes) {
     const firstSenatorVotes = bothVotes[0]
     const secondSenatorVotes = bothVotes[1]
-    let billsObject = {}
+    let talliesObject = {}
     firstSenatorVotes.forEach(function(vote) {
-      billsObject[vote.bill] = [vote]
+      talliesObject[vote.tally] = [vote]
     })
     secondSenatorVotes.forEach(function(vote) {
-      billsObject[vote.bill].push(vote)
+      talliesObject[vote.tally].push(vote)
     })
     let votePairs = []
     for (let i=0; i<firstSenatorVotes.length; i++) {
-      const firstVote = billsObject[firstSenatorVotes[i].bill][0]
-      const secondVote = billsObject[firstSenatorVotes[i].bill][1]
+      const firstVote = talliesObject[firstSenatorVotes[i].tally][0]
+      const secondVote = talliesObject[firstSenatorVotes[i].tally][1]
       if ((firstVote.outcome === "NO" && secondVote.outcome === "YES") || (firstVote.outcome === "YES" && secondVote.outcome === "NO")) {
-        console.log("Found bill with opposite outcomes", firstSenatorVotes[i].bill)
+        console.log("Found tally with opposite outcomes", firstSenatorVotes[i].tally)
         votePairs.push({
-          bill: firstSenatorVotes[i].bill,
+          tally: firstSenatorVotes[i].tally,
           firstVote: firstVote._id,
           secondVote: secondVote._id
         })

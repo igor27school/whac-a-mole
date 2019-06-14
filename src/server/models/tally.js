@@ -2,7 +2,7 @@ var mongoose = require('mongoose')
 
 var Schema = mongoose.Schema
 
-var BillSchema = new Schema(
+var TallySchema = new Schema(
   {
     _id: {type: String, required: true},
     title: {type: String, required: true},
@@ -13,17 +13,17 @@ var BillSchema = new Schema(
   { toObject: { virtuals: true } }
 )
 
-BillSchema
+TallySchema
 .virtual('url')
 .get(function () {
-  return '/bill/' + this._id
+  return '/tally/' + this._id
 })
 
-BillSchema
+TallySchema
 .virtual('formattedDate')
 .get(function () {
   const date = new Date(this.date)
   return (date.getMonth() + 1) + "/" + date.getDate() + "/" + date.getFullYear()
 })
 
-module.exports = mongoose.model('Bill', BillSchema)
+module.exports = mongoose.model('Tally', TallySchema)

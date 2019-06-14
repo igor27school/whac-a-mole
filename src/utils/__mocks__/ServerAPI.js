@@ -2,17 +2,17 @@
 
 const ServerAPI = jest.genMockFromModule('./ServerAPI')
 
-const bills = [
+const tallies = [
   {
-    id: 'testbill1',
-    title: 'test bill 1',
+    id: 'testtally1',
+    title: 'test tally 1',
   },
   {
-    id: 'testbill2',
-    title: 'test bill 2',
+    id: 'testtally2',
+    title: 'test tally 2',
   },
 ]
 
-ServerAPI.getBills = () => Promise.resolve(bills)
+ServerAPI.getBills = () => Promise.resolve(tallies)
 
 module.exports = ServerAPI

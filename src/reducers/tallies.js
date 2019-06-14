@@ -5,20 +5,20 @@ const initialState = {
   allIds: [],
 }
 
-function bills(state=initialState, action) {
+function tallies(state=initialState, action) {
   switch(action.type) {
-    case ActionTypes.RECEIVE_BILLS:
-      return action.bills.reduce((state, bill) => {
+    case ActionTypes.RECEIVE_TALLIES:
+      return action.tallies.reduce((state, tally) => {
         return {
           ...state,
           byId: {
             ...state.byId,
-            [bill._id]: {
-              ...state.byId[bill._id],
-              ...bill,
+            [tally._id]: {
+              ...state.byId[tally._id],
+              ...tally,
             }
           },
-          allIds: state.allIds.concat([bill._id])
+          allIds: state.allIds.concat([tally._id])
         }
       },
       state)
@@ -27,8 +27,8 @@ function bills(state=initialState, action) {
         ...state,
         byId: {
           ...state.byId,
-          [action.billId]: {
-            ...state.byId[action.billId],
+          [action.tallyId]: {
+            ...state.byId[action.tallyId],
             votes: action.votes.map(vote => vote._id),
           },
         },
@@ -38,4 +38,4 @@ function bills(state=initialState, action) {
   }
 }
 
-export default bills
+export default tallies

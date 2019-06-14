@@ -3,21 +3,21 @@ import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import PropTypes from 'prop-types'
 import { fetchVoteFromServer } from '../actions/ActionCreators'
-import BillTitle from './BillTitle'
+import TallyTitle from './TallyTitle'
 import SenatorNickname from './SenatorNickname'
 
 /**
-* @description This component is used in BillDetails view. It displays the information releavant to a particular vote.
+* @description This component is used in to display the opposite votes by differrent Congresswomen in the same tally.
 */
 export class VoteDifference extends Component {
   static propTypes = {
-    bill: PropTypes.string.isRequired,
+    tally: PropTypes.string.isRequired,
     hasFirstVote: PropTypes.bool.isRequired,
     firstVoteId: PropTypes.string.isRequired,
     firstVote: PropTypes.shape({
       _id: PropTypes.string.isRequired,
       rep: PropTypes.string.isRequired,
-      bill: PropTypes.string.isRequired,
+      tally: PropTypes.string.isRequired,
       outcome: PropTypes.string.isRequired,
       url: PropTypes.string.isRequired,
     }),
@@ -26,7 +26,7 @@ export class VoteDifference extends Component {
     secondVote: PropTypes.shape({
       _id: PropTypes.string.isRequired,
       rep: PropTypes.string.isRequired,
-      bill: PropTypes.string.isRequired,
+      tally: PropTypes.string.isRequired,
       outcome: PropTypes.string.isRequired,
       url: PropTypes.string.isRequired,
     }),
@@ -42,7 +42,7 @@ export class VoteDifference extends Component {
     }
   }
   render() {
-    const { bill, firstVote, firstVoteId, secondVote, secondVoteId } = this.props
+    const { tally, firstVote, firstVoteId, secondVote, secondVoteId } = this.props
     if (!firstVote){
       return (
         <div>Invalid first vote id: {firstVoteId}</div>
@@ -55,7 +55,7 @@ export class VoteDifference extends Component {
     }
     return (
       <div>
-        On <BillTitle billId={bill}/>
+        On <TallyTitle tallyId={tally}/>
         <SenatorNickname senatorId={firstVote.rep}/> voted {firstVote.outcome}(<Link to={firstVote.url}>details</Link>), but <SenatorNickname senatorId={secondVote.rep}/> voted {secondVote.outcome}(<Link to={secondVote.url}>details</Link>)
       </div>
     )
@@ -73,7 +73,7 @@ function mapStateToProps ({ votes }, { firstVoteId, secondVoteId }) {
 
 function mapDispatchToProps (dispatch) {
   return {
-    fetchVoteFromServer: (billId) => dispatch(fetchVoteFromServer(billId)),
+    fetchVoteFromServer: (tallyId) => dispatch(fetchVoteFromServer(tallyId)),
   }
 }
 

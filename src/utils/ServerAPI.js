@@ -1,7 +1,7 @@
 const api = 'http://localhost:3001'
 
-export const getBills = () =>
-  fetch(`${api}/bills`).then(res => res.json())
+export const getTallies = () =>
+  fetch(`${api}/tallies`).then(res => res.json())
 
 export const getSenators = () =>
   fetch(`${api}/reps`).then(res => res.json())
@@ -12,8 +12,8 @@ export const getUser = userId =>
 export const getUsers = () =>
   fetch(`${api}/users`).then(res => res.json())
 
-export const getVotesForBill = billId =>
-  fetch(`${api}/votes?billId=${billId}`).then(res => res.json())
+export const getVotesForTally = tallyId =>
+  fetch(`${api}/votes?tallyId=${tallyId}`).then(res => res.json())
 
 export const getVotesForSenator = senatorId =>
   fetch(`${api}/votes?repId=${senatorId}`).then(res => res.json())

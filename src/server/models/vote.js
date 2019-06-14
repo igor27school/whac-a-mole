@@ -8,7 +8,7 @@ var VoteSchema = new Schema(
   {
     _id: {type: String, required: true},
     rep: {type: String, ref: 'Rep', required: true},
-    bill: {type: String, ref: 'Bill', required: true},
+    tally: {type: String, ref: 'Tally', required: true},
     outcome: {type: String, required: true, enum: ['YES', 'NO', 'ABSENT']},
     link: {type: String, required: true}
   },

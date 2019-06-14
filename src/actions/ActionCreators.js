@@ -1,18 +1,18 @@
 import * as ServerAPI from '../utils/ServerAPI'
 import * as Actions from './Actions'
 
-export function fetchBillsFromServer() {
-  return dispatch => ServerAPI.getBills().then(bills => {
-      dispatch(Actions.receiveBills(bills))
-      return bills
+export function fetchTalliesFromServer() {
+  return dispatch => ServerAPI.getTallies().then(tallies => {
+      dispatch(Actions.receiveTallies(tallies))
+      return tallies
   }).catch(err => console.error(err))
 }
 
 /* Separate function for potential performance improvement in the future */
-export function fetchBillFromServer(billId) {
-  return dispatch => ServerAPI.getBills().then(bills => {
-      dispatch(Actions.receiveBills(bills))
-      return bills
+export function fetchTallyFromServer(tallyId) {
+  return dispatch => ServerAPI.getTallies().then(tallies => {
+      dispatch(Actions.receiveTallies(tallies))
+      return tallies
   }).catch(err => console.error(err))
 }
 
@@ -38,9 +38,9 @@ export function fetchUserFromServer(userId) {
   }).catch(err => console.error(err))
 }
 
-export function fetchVotesForBillFromServer(billId) {
-  return dispatch => ServerAPI.getVotesForBill(billId).then(votes => {
-      dispatch(Actions.receiveVotesForBill(billId, votes))
+export function fetchVotesForTallyFromServer(tallyId) {
+  return dispatch => ServerAPI.getVotesForTally(tallyId).then(votes => {
+      dispatch(Actions.receiveVotesForTally(tallyId, votes))
       return votes
   }).catch(err => console.error(err))
 }

@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import PropTypes from 'prop-types'
 import { fetchVoteFromServer } from '../actions/ActionCreators'
-import BillOverview from './BillOverview'
+import TallyOverview from './TallyOverview'
 import SenatorOverview from './SenatorOverview'
 import Marker from './Marker'
 
@@ -16,7 +16,7 @@ export class VoteDetails extends Component {
     voteId: PropTypes.string.isRequired,
     vote: PropTypes.shape({
       _id: PropTypes.string.isRequired,
-      bill: PropTypes.string.isRequired,
+      tally: PropTypes.string.isRequired,
       rep: PropTypes.string.isRequired,
       outcome: PropTypes.string.isRequired,
       link: PropTypes.string.isRequired,
@@ -39,8 +39,8 @@ export class VoteDetails extends Component {
     return (
       <div>
         <SenatorOverview senatorId={vote.rep}/>
-        <BillOverview billId={vote.bill}/>
-        <h3>Vote link: <Link to={`${vote.link}`} target="_blank">{vote.link}</Link></h3>
+        <TallyOverview tallyId={vote.tally}/>
+        <h3>Tally link: <Link to={`${vote.link}`} target="_blank">{vote.link}</Link></h3>
         <h5>The vote on record is {vote.outcome}</h5>
         <label><input name="agreement" type="checkbox"/>I have carefully studied the evidence and have come to my decision</label>
         <Marker id={vote._id}/>
@@ -60,7 +60,7 @@ function mapStateToProps ({ votes }, { match }) {
 
 function mapDispatchToProps (dispatch) {
   return {
-    fetchVoteFromServer: (billId) => dispatch(fetchVoteFromServer(billId)),
+    fetchVoteFromServer: (tallyId) => dispatch(fetchVoteFromServer(tallyId)),
   }
 }
 

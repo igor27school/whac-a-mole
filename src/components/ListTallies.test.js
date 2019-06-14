@@ -1,24 +1,24 @@
 import React from 'react'
 import ShallowRenderer from 'react-test-renderer/shallow'
-import { ListBills } from './ListBills'
+import { ListTallies } from './ListTallies'
 
 jest.mock('../utils/ServerAPI')
 
-describe('ListBills tests', () => {
+describe('ListTallies tests', () => {
   const setup = () => {
     const props = {
-      hasBills: true,
-      bills: [
+      hasTallies: true,
+      tallies: [
         {
-          id: 'bill1',
-          title: 'bill title 1',
+          id: 'tally1',
+          title: 'tally title 1',
         },
         {
-          id: 'bill2',
-          title: 'bill title 2',
+          id: 'tally2',
+          title: 'tally title 2',
         },
       ],
-      fetchBillsFromServer: jest.fn(),
+      fetchTalliesFromServer: jest.fn(),
     }
     const renderer = new ShallowRenderer()
     return {
@@ -27,9 +27,9 @@ describe('ListBills tests', () => {
     }
   }
 
-  it('Bills match the snapshot', () => {
+  it('Tallies match the snapshot', () => {
     const { renderer, props } = setup()
-    renderer.render(<ListBills {...props}/>)
+    renderer.render(<ListTallies {...props}/>)
     const result = renderer.getRenderOutput()
     expect(result).toMatchSnapshot()
   })
