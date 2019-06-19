@@ -27,7 +27,7 @@ export class ListTallies extends Component {
     const { tallies } = this.props
     return (
       <div>
-        <h2>BILLS</h2>
+        <h2>TALLIES</h2>
         <ul>
           {tallies.sort(function(b1, b2) {
             if (b1.date < b2.date){
