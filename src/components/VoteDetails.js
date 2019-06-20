@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { Link } from 'react-router-dom'
 import PropTypes from 'prop-types'
 import { fetchVoteFromServer } from '../actions/ActionCreators'
 import TallyOverview from './TallyOverview'
@@ -19,7 +18,6 @@ export class VoteDetails extends Component {
       tally: PropTypes.string.isRequired,
       rep: PropTypes.string.isRequired,
       outcome: PropTypes.string.isRequired,
-      link: PropTypes.string.isRequired,
     }),
     fetchVoteFromServer: PropTypes.func.isRequired,
   }
@@ -40,7 +38,6 @@ export class VoteDetails extends Component {
       <div>
         <SenatorOverview senatorId={vote.rep}/>
         <TallyOverview tallyId={vote.tally}/>
-        <h3>Tally link: <Link to={`${vote.link}`} target="_blank">{vote.link}</Link></h3>
         <h5>The vote on record is {vote.outcome}</h5>
         <label><input name="agreement" type="checkbox"/>I have carefully studied the evidence and have come to my decision</label>
         <Marker id={vote._id}/>

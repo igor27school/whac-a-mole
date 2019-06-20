@@ -11,10 +11,12 @@ if (!userArgs[0].startsWith('mongodb://')) {
 
 var async = require('async')
 var fs = require('fs')
+var Bill = require('./models/bill')
 var Rep = require('./models/rep')
 var Tally = require('./models/tally')
 var Vote = require('./models/vote')
 
+let bills = {}
 let reps = {}
 let tallies = {}
 
@@ -25,6 +27,19 @@ var db = mongoose.connection
 mongoose.connection.on('error', console.error.bind(console, 'MongoDB connection error:'))
 
 console.log('Database connection opened')
+
+function billCreate(_id, title, link, cb) {
+  var bill = new Bill({_id, title, link})
+
+  bill.save(function (err) {
+    if (err) {
+      cb(err, null)
+      return
+    }
+    bills[bill['_id']] = bill
+    cb(null, bill)
+  })
+}
 
 function repCreate(_id, name, state, link, cb) {
   var rep = new Rep({_id, name, state, link})
@@ -39,8 +54,8 @@ function repCreate(_id, name, state, link, cb) {
   })
 }
 
-function tallyCreate(_id, title, date, summary, link, cb) {
-  var tally = new Tally({_id, title, date, summary, link})
+function tallyCreate(_id, bill, date, link, cb) {
+  var tally = new Tally({_id, bill, date, link})
 
   tally.save(function (err) {
     if (err) {
@@ -52,8 +67,8 @@ function tallyCreate(_id, title, date, summary, link, cb) {
   })
 }
 
-function voteCreate(_id, rep, tally, outcome, link, cb) {
-  var vote = new Vote({_id, rep, tally, outcome, link})
+function voteCreate(_id, rep, tally, outcome, cb) {
+  var vote = new Vote({_id, rep, tally, outcome})
 
   vote.save(function (err) {
     if (err) {
@@ -62,6 +77,19 @@ function voteCreate(_id, rep, tally, outcome, link, cb) {
     }
     cb(null, vote)
   })
+}
+
+function createBills(cb) {
+  console.log("Inside createBills")
+  const array_functions = []
+  const bills = JSON.parse(fs.readFileSync('/tmp/bills.json'))
+  for (let i=0; i<bills.length; i++) {
+    let bill = bills[i]
+    array_functions.push(function(callback) {
+      billCreate(bill['_id'], bill['title'], bill['link'], callback)
+    })
+  }
+  async.parallel(array_functions, cb);
 }
 
 function createRepsAndTallies(cb) {
@@ -81,7 +109,7 @@ function createRepsAndTallies(cb) {
   for (let i=0; i<tallies.length; i++) {
     let tally = tallies[i]
     array_functions.push(function(callback) {
-      tallyCreate(tally['_id'], tally['title'], tally['date'], tally['summary'], tally['link'], callback)
+      tallyCreate(tally['_id'], bills[tally['bill_id']], tally['date'], tally['link'], callback)
     })
   }
   async.parallel(array_functions, cb);
@@ -94,13 +122,14 @@ function createVotes(cb) {
   for (let i=0; i<votes.length; i++) {
     let vote = votes[i]
     array_functions.push(function(callback) {
-      voteCreate(vote['_id'], reps[vote['rep_id']], tallies[vote['tally_id']], vote['outcome'].toUpperCase(), vote['link'], callback)
+      voteCreate(vote['_id'], reps[vote['rep_id']], tallies[vote['tally_id']], vote['outcome'].toUpperCase(), callback)
     })
   }
   async.parallel(array_functions, cb);
 }
 
 async.series([
+    createBills,
     createRepsAndTallies,
     createVotes
 ],
@@ -110,7 +139,7 @@ function(err, results) {
         console.log('FINAL ERR: '+err);
     }
     else {
-        console.log('Successfully saved reps, tallies and votes')
+        console.log('Successfully saved bills, reps, tallies and votes')
 
     }
     // All done, disconnect from database

@@ -13,7 +13,7 @@ export class ListTallies extends Component {
     tallies: PropTypes.arrayOf(
       PropTypes.shape({
         _id: PropTypes.string.isRequired,
-        title: PropTypes.string.isRequired,
+        bill: PropTypes.string.isRequired,
       })
     ).isRequired,
   }

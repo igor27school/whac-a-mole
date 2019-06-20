@@ -1,5 +1,8 @@
 const api = 'http://localhost:3001'
 
+export const getBill = billId =>
+  fetch(`${api}/bill/${billId}`).then(res => res.json())
+
 export const getTallies = () =>
   fetch(`${api}/tallies`).then(res => res.json())
 

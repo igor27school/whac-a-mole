@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import PropTypes from 'prop-types'
 import { fetchTallyFromServer } from '../actions/ActionCreators'
+import BillOverview from './BillOverview'
 
 /**
 * @description Displays details of a particular tally.
@@ -13,9 +14,8 @@ export class TallyOverview extends Component {
     tallyId: PropTypes.string.isRequired,
     tally: PropTypes.shape({
       _id: PropTypes.string.isRequired,
-      title: PropTypes.string.isRequired,
+      bill: PropTypes.string.isRequired,
       date: PropTypes.string.isRequired,
-      summary: PropTypes.string.isRequired,
       link: PropTypes.string.isRequired,
     }),
   }
@@ -38,10 +38,9 @@ export class TallyOverview extends Component {
     }
     return (
       <div>
-        <h2>BILL: {tally.title}</h2>
+        <BillOverview billId={tally.bill}/>
         <h3>Date: {tally.formattedDate}</h3>
-        <h3>Description: {tally.summary}</h3>
-        <h3>Bill link: <Link to={`${tally.link}`} target="_blank">{tally.link}</Link></h3>
+        <h3>Tally link: <Link to={`${tally.link}`} target="_blank">{tally.link}</Link></h3>
       </div>
     )
   }

@@ -1,5 +1,10 @@
 import * as types from '../constants/ActionTypes'
 
+export const receiveBill = bill => ({
+  type: types.RECEIVE_BILL,
+  bill,
+})
+
 export const receiveTallies = tallies => ({
   type: types.RECEIVE_TALLIES,
   tallies,

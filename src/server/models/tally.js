@@ -5,9 +5,8 @@ var Schema = mongoose.Schema
 var TallySchema = new Schema(
   {
     _id: {type: String, required: true},
-    title: {type: String, required: true},
+    bill: {type: String, ref: 'Bill', required: true},
     date: {type: Date, required: true},
-    summary: {type: String, required: true},
     link: {type: String, required: true}
   },
   { toObject: { virtuals: true } }

@@ -19,7 +19,6 @@ export class VoteSummary extends Component {
       rep: PropTypes.string.isRequired,
       tally: PropTypes.string.isRequired,
       outcome: PropTypes.string.isRequired,
-      link: PropTypes.string.isRequired,
       url: PropTypes.string.isRequired,
     }),
     fetchVoteFromServer: PropTypes.func.isRequired,

@@ -2,6 +2,7 @@ var mongoose = require('mongoose')
 var express = require('express')
 var router = express.Router()
 var url = require('url')
+var Bill = require('../models/Bill')
 var Rep = require('../models/Rep')
 var Tally = require('../models/Tally')
 var Vote = require('../models/Vote')
@@ -18,6 +19,14 @@ router.get('/reps', function(req, res) {
     if (err)
       res.send(err)
     res.json(reps)
+  })
+})
+
+router.get('/bill/:billId', function(req, res) {
+  Bill.findById(req.params.billId, function(err, bill) {
+    if (err)
+      res.send(err)
+    res.json(bill)
   })
 })
 

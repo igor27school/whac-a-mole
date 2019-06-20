@@ -12,7 +12,7 @@ export class TallyTitle extends Component {
     hasTallies: PropTypes.bool.isRequired,
     tally: PropTypes.shape({
       _id: PropTypes.string.isRequired,
-      title: PropTypes.string.isRequired,
+      bill: PropTypes.string.isRequired,
     }),
     tallyId: PropTypes.string.isRequired,
     fetchTallyFromServer: PropTypes.func.isRequired,
@@ -31,7 +31,7 @@ export class TallyTitle extends Component {
       )
     }
     return (
-      <Link to={`/tally/${tally._id}`}>{tally.title}</Link>
+      <Link to={`/tally/${tally._id}`}>Vote</Link>
     )
   }
 }

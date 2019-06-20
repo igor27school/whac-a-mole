@@ -1,6 +1,13 @@
 import * as ServerAPI from '../utils/ServerAPI'
 import * as Actions from './Actions'
 
+export function fetchBillFromServer(billId) {
+  return dispatch => ServerAPI.getBill(billId).then(bill => {
+      dispatch(Actions.receiveBill(bill))
+      return bill
+  }).catch(err => console.error(err))
+}
+
 export function fetchTalliesFromServer() {
   return dispatch => ServerAPI.getTallies().then(tallies => {
       dispatch(Actions.receiveTallies(tallies))

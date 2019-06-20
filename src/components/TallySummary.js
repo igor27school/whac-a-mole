@@ -12,7 +12,7 @@ export class TallySummary extends Component {
     hasTallies: PropTypes.bool.isRequired,
     tally: PropTypes.shape({
       _id: PropTypes.string.isRequired,
-      title: PropTypes.string.isRequired,
+      bill: PropTypes.string.isRequired,
       url: PropTypes.string.isRequired,
     }),
     tallyId: PropTypes.string.isRequired,
@@ -33,7 +33,7 @@ export class TallySummary extends Component {
     }
     return (
       <div>
-        <Link to={`${tally.url}`}>{tally.title} ({tally.formattedDate})</Link>
+        <Link to={`${tally.url}`}>Vote ({tally.formattedDate})</Link>
       </div>
     )
   }
