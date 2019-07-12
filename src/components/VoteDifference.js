@@ -73,7 +73,7 @@ function mapStateToProps ({ votes }, { firstVoteId, secondVoteId }) {
 
 function mapDispatchToProps (dispatch) {
   return {
-    fetchVoteFromServer: (tallyId) => dispatch(fetchVoteFromServer(tallyId)),
+    fetchVoteFromServer: (voteId) => dispatch(fetchVoteFromServer(voteId)),
   }
 }
 
