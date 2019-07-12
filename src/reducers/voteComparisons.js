@@ -16,7 +16,6 @@ function voteComparisons(state=initialState, action) {
           ...state.byId,
           [compKey]: action.votePairs,
         },
-        allIds: state.allIds.concat([compKey])
       }
     default:
       return state

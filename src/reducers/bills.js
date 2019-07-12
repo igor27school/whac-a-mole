@@ -32,7 +32,6 @@ function bills(state=initialState, action) {
             ...action.bill,
           }
         },
-        allIds: state.allIds.concat([action.bill._id])
       }
     case ActionTypes.RECEIVE_TALLIES_FOR_BILL:
       return {

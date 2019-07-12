@@ -16,7 +16,6 @@ function users(state=initialState, action) {
             ...action.user,
           }
         },
-        allIds: state.allIds.concat([action.user._id])
       }
     case ActionTypes.RECEIVE_MARKS_FOR_USER:
       return {

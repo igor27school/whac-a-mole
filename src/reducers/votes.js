@@ -16,7 +16,6 @@ function votes(state=initialState, action) {
             ...action.vote,
           }
         },
-        allIds: state.allIds.concat([action.vote._id])
       }
     case ActionTypes.RECEIVE_USER_MARKS_FOR_VOTE:
       return {
@@ -42,7 +41,6 @@ function votes(state=initialState, action) {
               ...vote,
             }
           },
-          allIds: state.allIds.concat([vote._id])
         }
       },
       state)

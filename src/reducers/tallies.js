@@ -44,7 +44,6 @@ function tallies(state=initialState, action) {
               ...tally,
             }
           },
-          allIds: state.allIds.concat([tally._id])
         }
       },
       state)

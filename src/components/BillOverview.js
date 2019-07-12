@@ -12,9 +12,9 @@ export class BillOverview extends Component {
     hasBill: PropTypes.bool.isRequired,
     billId: PropTypes.string.isRequired,
     bill: PropTypes.shape({
-      _id: PropTypes.string.isRequired,
-      title: PropTypes.string.isRequired,
-      link: PropTypes.string.isRequired,
+      _id: PropTypes.string,
+      title: PropTypes.string,
+      link: PropTypes.string,
     }),
   }
   componentDidMount() {
