@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { Switch, Route } from 'react-router-dom'
 import ListTalliesAndSenators from './ListTalliesAndSenators'
+import BillDetails from './BillDetails'
 import TallyDetails from './TallyDetails'
 import SenatorDetails from './SenatorDetails'
 import UserDetails from './UserDetails'
@@ -16,6 +17,7 @@ class App extends Component {
         <Facebook />
         <Switch>
           <Route exact path="/" component={ListTalliesAndSenators}/>
+          <Route path="/bill/:bill_id" component={BillDetails}/>
           <Route path="/tally/:tally_id" component={TallyDetails}/>
           <Route path="/senator/:senator_id" component={SenatorDetails}/>
           <Route path="/vote/:vote_id" component={VoteDetails}/>

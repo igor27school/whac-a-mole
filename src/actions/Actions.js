@@ -10,6 +10,12 @@ export const receiveTallies = tallies => ({
   tallies,
 })
 
+export const receiveTalliesForBill = (billId, tallies) => ({
+  type: types.RECEIVE_TALLIES_FOR_BILL,
+  billId,
+  tallies,
+})
+
 export const receiveSenators = senators => ({
   type: types.RECEIVE_SENATORS,
   senators,
@@ -26,7 +32,7 @@ export const receiveUsers = users => ({
 })
 
 export const receiveVotesForTally = (tallyId, votes) => ({
-  type: types.RECEIVE_VOTES_FOR_BILL,
+  type: types.RECEIVE_VOTES_FOR_TALLY,
   tallyId,
   votes,
 })

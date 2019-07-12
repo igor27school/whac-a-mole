@@ -47,7 +47,12 @@ router.get('/users', function(req, res) {
 })
 
 router.get('/tallies', function(req, res) {
-  Tally.find(function(err, tallies) {
+  var q = url.parse(req.url, true).query;
+  var searchQuery = {}
+  if (q.billId) {
+    searchQuery['bill'] = q.billId
+  }
+  Tally.find(searchQuery, function(err, tallies) {
     if (err)
       res.send(err)
     res.json(tallies)

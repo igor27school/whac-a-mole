@@ -28,8 +28,8 @@ export class BillOverview extends Component {
     }
   }
   render() {
-    const { bill, billId } = this.props
-    if (!bill) {
+    const { bill, billId, hasBill } = this.props
+    if (!hasBill) {
       return (
         <h4>The bill {billId} does not exist</h4>
       )
@@ -48,7 +48,7 @@ function mapStateToProps ({ bills }, { billId }) {
   return {
     bill,
     billId,
-    hasBill: bills.allIds.length > 0,
+    hasBill: bill && bill._id ? true : false,
   }
 }
 

@@ -18,6 +18,17 @@ function bills(state=initialState, action) {
         },
         allIds: state.allIds.concat([action.bill._id])
       }
+    case ActionTypes.RECEIVE_TALLIES_FOR_BILL:
+      return {
+        ...state,
+        byId: {
+          ...state.byId,
+          [action.billId]: {
+            ...state.byId[action.billId],
+            tallies: action.tallies.map(tally => tally._id),
+          },
+        },
+      }
     default:
       return state
   }

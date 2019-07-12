@@ -24,7 +24,12 @@ export class TallyDetails extends Component {
     }
   }
   render() {
-    const { tallyId, votes } = this.props
+    const { tallyId, tally, votes } = this.props
+    if (!tally) {
+      return (
+        <h4>The tally {tallyId} does not exist</h4>
+      )
+    }
     return (
       <div>
         <TallyOverview tallyId={tallyId}/>
@@ -39,6 +44,7 @@ function mapStateToProps ({ tallies, votes }, { match }) {
   const tally = tallies.byId[tallyId]
   return {
     tallyId,
+    tally,
     votes: tally && tally.votes ? tally.votes : [],
     hasVotes: tally && tally.votes && tally.votes.length > 0 ? true : false,
   }

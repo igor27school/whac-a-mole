@@ -6,6 +6,9 @@ export const getBill = billId =>
 export const getTallies = () =>
   fetch(`${api}/tallies`).then(res => res.json())
 
+export const getTalliesForBill = billId =>
+  fetch(`${api}/tallies?billId=${billId}`).then(res => res.json())
+
 export const getSenators = () =>
   fetch(`${api}/reps`).then(res => res.json())
 

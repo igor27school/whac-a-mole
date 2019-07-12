@@ -15,6 +15,13 @@ export function fetchTalliesFromServer() {
   }).catch(err => console.error(err))
 }
 
+export function fetchTalliesForBillFromServer(billId) {
+  return dispatch => ServerAPI.getTalliesForBill(billId).then(tallies => {
+      dispatch(Actions.receiveTalliesForBill(billId, tallies))
+      return tallies
+  }).catch(err => console.error(err))
+}
+
 /* Separate function for potential performance improvement in the future */
 export function fetchTallyFromServer(tallyId) {
   return dispatch => ServerAPI.getTallies().then(tallies => {

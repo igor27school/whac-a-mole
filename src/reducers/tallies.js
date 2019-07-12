@@ -22,7 +22,7 @@ function tallies(state=initialState, action) {
         }
       },
       state)
-    case ActionTypes.RECEIVE_VOTES_FOR_BILL:
+    case ActionTypes.RECEIVE_VOTES_FOR_TALLY:
       return {
         ...state,
         byId: {
@@ -33,6 +33,21 @@ function tallies(state=initialState, action) {
           },
         },
       }
+    case ActionTypes.RECEIVE_TALLIES_FOR_BILL:
+      return action.tallies.reduce((state, tally) => {
+        return {
+          ...state,
+          byId: {
+            ...state.byId,
+            [tally._id]: {
+              ...state.byId[tally._id],
+              ...tally,
+            }
+          },
+          allIds: state.allIds.concat([tally._id])
+        }
+      },
+      state)
     default:
       return state
   }

@@ -30,7 +30,7 @@ function votes(state=initialState, action) {
           },
         },
       }
-    case ActionTypes.RECEIVE_VOTES_FOR_BILL:
+    case ActionTypes.RECEIVE_VOTES_FOR_TALLY:
     case ActionTypes.RECEIVE_VOTES_FOR_SENATOR:
       return action.votes.reduce((state, vote) => {
         return {
