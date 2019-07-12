@@ -22,6 +22,14 @@ router.get('/reps', function(req, res) {
   })
 })
 
+router.get('/bills', function(req, res) {
+  Bill.find(function(err, bills) {
+    if (err)
+      res.send(err)
+    res.json(bills)
+  })
+})
+
 router.get('/bill/:billId', function(req, res) {
   Bill.findById(req.params.billId, function(err, bill) {
     if (err)

@@ -39,7 +39,7 @@ export class BillDetails extends Component {
   }
 }
 
-function mapStateToProps ({ bills, tallies }, { match }) {
+function mapStateToProps ({ bills }, { match }) {
   const billId = match.params.bill_id
   const bill = bills.byId[billId]
   return {

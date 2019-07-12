@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Switch, Route } from 'react-router-dom'
-import ListTalliesAndSenators from './ListTalliesAndSenators'
+import ListBillsAndSenators from './ListBillsAndSenators'
 import BillDetails from './BillDetails'
 import TallyDetails from './TallyDetails'
 import SenatorDetails from './SenatorDetails'
@@ -16,7 +16,7 @@ class App extends Component {
       <div>
         <Facebook />
         <Switch>
-          <Route exact path="/" component={ListTalliesAndSenators}/>
+          <Route exact path="/" component={ListBillsAndSenators}/>
           <Route path="/bill/:bill_id" component={BillDetails}/>
           <Route path="/tally/:tally_id" component={TallyDetails}/>
           <Route path="/senator/:senator_id" component={SenatorDetails}/>

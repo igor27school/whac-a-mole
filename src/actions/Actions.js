@@ -5,6 +5,11 @@ export const receiveBill = bill => ({
   bill,
 })
 
+export const receiveBills = bills => ({
+  type: types.RECEIVE_BILLS,
+  bills,
+})
+
 export const receiveTallies = tallies => ({
   type: types.RECEIVE_TALLIES,
   tallies,

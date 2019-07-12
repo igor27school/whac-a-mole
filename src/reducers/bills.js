@@ -7,12 +7,28 @@ const initialState = {
 
 function bills(state=initialState, action) {
   switch(action.type) {
+    case ActionTypes.RECEIVE_BILLS:
+      return action.bills.reduce((state, bill) => {
+        return {
+          ...state,
+          byId: {
+            ...state.byId,
+            [bill._id]: {
+              ...state.byId[bill._id],
+              ...bill,
+            }
+          },
+          allIds: state.allIds.concat([bill._id])
+        }
+      },
+      state)
     case ActionTypes.RECEIVE_BILL:
       return {
         ...state,
         byId: {
           ...state.byId,
           [action.bill._id]: {
+            ...state.byId[action.bill._id],
             ...action.bill,
           }
         },

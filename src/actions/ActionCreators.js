@@ -8,6 +8,13 @@ export function fetchBillFromServer(billId) {
   }).catch(err => console.error(err))
 }
 
+export function fetchBillsFromServer() {
+  return dispatch => ServerAPI.getBills().then(bills => {
+      dispatch(Actions.receiveBills(bills))
+      return bills
+  }).catch(err => console.error(err))
+}
+
 export function fetchTalliesFromServer() {
   return dispatch => ServerAPI.getTallies().then(tallies => {
       dispatch(Actions.receiveTallies(tallies))

@@ -1,7 +1,5 @@
 import React, { Component } from 'react'
-import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
-import { fetchTalliesFromServer } from '../actions/ActionCreators'
 import TallySummary from './TallySummary'
 
 /**
@@ -9,19 +7,9 @@ import TallySummary from './TallySummary'
 */
 export class ListTallies extends Component {
   static propTypes = {
-    hasTallies: PropTypes.bool.isRequired,
     tallies: PropTypes.arrayOf(
-      PropTypes.shape({
-        _id: PropTypes.string.isRequired,
-        bill: PropTypes.string.isRequired,
-      })
+      PropTypes.string.isRequired,
     ).isRequired,
-  }
-  componentDidMount() {
-    const { hasTallies, fetchTalliesFromServer } = this.props
-    if (!hasTallies) {
-      fetchTalliesFromServer()
-    }
   }
   render() {
     const { tallies } = this.props
@@ -34,9 +22,9 @@ export class ListTallies extends Component {
               return 1
             }
             return -1
-          }).map(tally => (
-            <li key={tally._id}>
-              <TallySummary tallyId={tally._id}/>
+          }).map(tallyId => (
+            <li key={tallyId}>
+              <TallySummary tallyId={tallyId}/>
             </li>
           ))}
         </ul>
@@ -45,17 +33,4 @@ export class ListTallies extends Component {
   }
 }
 
-function mapStateToProps ({ tallies }) {
-  return {
-    tallies: tallies.allIds.map(tally => tallies.byId[tally]),
-    hasTallies: tallies.allIds.length > 0,
-  }
-}
-
-function mapDispatchToProps (dispatch) {
-  return {
-    fetchTalliesFromServer: () => dispatch(fetchTalliesFromServer()),
-  }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(ListTallies)
+export default ListTallies

@@ -1,12 +1,12 @@
 import React, { Component } from 'react'
-import ListTallies from './ListTallies'
+import ListBills from './ListBills'
 import ListSenators from './ListSenators'
 
-export default class ListTalliesAndSenators extends Component {
+export default class ListBillsAndSenators extends Component {
   render() {
     return (
       <div>
-        <ListTallies/>
+        <ListBills/>
         <ListSenators/>
       </div>
     )

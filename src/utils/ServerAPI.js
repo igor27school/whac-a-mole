@@ -3,6 +3,9 @@ const api = 'http://localhost:3001'
 export const getBill = billId =>
   fetch(`${api}/bill/${billId}`).then(res => res.json())
 
+export const getBills = () =>
+  fetch(`${api}/bills`).then(res => res.json())
+
 export const getTallies = () =>
   fetch(`${api}/tallies`).then(res => res.json())
 
