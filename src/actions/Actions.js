@@ -10,6 +10,13 @@ export const receiveBills = bills => ({
   bills,
 })
 
+export const receiveOppositeVotes = (firstTallyId, secondTallyId, oppositeVotes) => ({
+  type: types.RECEIVE_OPPOSITE_VOTES,
+  firstTallyId,
+  secondTallyId,
+  oppositeVotes,
+})
+
 export const receiveTallies = tallies => ({
   type: types.RECEIVE_TALLIES,
   tallies,

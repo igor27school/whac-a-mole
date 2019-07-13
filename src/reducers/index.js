@@ -1,9 +1,10 @@
 import { combineReducers } from 'redux'
 import bills from './bills'
-import tallies from './tallies'
+import oppositeVotes from './oppositeVotes'
 import senators from './senators'
+import tallies from './tallies'
 import users from './users'
-import votes from './votes'
 import voteComparisons from './voteComparisons'
+import votes from './votes'
 
-export default combineReducers({bills, tallies, senators, users, votes, voteComparisons})
+export default combineReducers({bills, oppositeVotes, senators, tallies, users, voteComparisons, votes})

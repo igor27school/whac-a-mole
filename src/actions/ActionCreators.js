@@ -15,6 +15,10 @@ export function fetchBillsFromServer() {
   }).catch(err => console.error(err))
 }
 
+export function fetchSenatorsWithOppositeVotesFromServer(firstTallyId, secondTallyId) {
+  return dispatch => ServerAPI.getOppositeVotes(firstTallyId, secondTallyId).then(oppositeVotes => dispatch(Actions.receiveOppositeVotes(firstTallyId, secondTallyId, oppositeVotes))).catch(err => console.error(err))
+}
+
 export function fetchTalliesFromServer() {
   return dispatch => ServerAPI.getTallies().then(tallies => {
       dispatch(Actions.receiveTallies(tallies))

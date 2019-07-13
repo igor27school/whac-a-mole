@@ -4,6 +4,7 @@ import PropTypes from 'prop-types'
 import { fetchTalliesForBillFromServer } from '../actions/ActionCreators'
 import BillOverview from './BillOverview'
 import ListTallies from './ListTallies'
+import ListOppositeVotes from './ListOppositeVotes'
 
 /**
 * @description Displays all tallies for the bill.
@@ -30,12 +31,24 @@ export class BillDetails extends Component {
         <h4>The bill {billId} does not exist</h4>
       )
     }
-    return (
-      <div>
-        <BillOverview billId={billId}/>
-        <ListTallies tallies={tallies}/>
-      </div>
-    )
+    // TODO: refactor this logic
+    if (tallies.length === 2) {
+      return (
+        <div>
+          <BillOverview billId={billId}/>
+          <ListTallies tallies={tallies}/>
+          <ListOppositeVotes firstTallyId={tallies[0]} secondTallyId={tallies[1]}/>
+        </div>
+      )
+    } else {
+      return (
+        <div>
+          <BillOverview billId={billId}/>
+          <ListTallies tallies={tallies}/>
+        </div>
+      )
+    }
+
   }
 }
 

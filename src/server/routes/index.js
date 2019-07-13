@@ -120,7 +120,6 @@ router.get('/compare/:firstSenatorId/:secondSenatorId', function(req, res) {
       const firstVote = talliesObject[firstSenatorVotes[i].tally][0]
       const secondVote = talliesObject[firstSenatorVotes[i].tally][1]
       if ((firstVote.outcome === "NO" && secondVote.outcome === "YES") || (firstVote.outcome === "YES" && secondVote.outcome === "NO")) {
-        console.log("Found tally with opposite outcomes", firstSenatorVotes[i].tally)
         votePairs.push({
           tally: firstSenatorVotes[i].tally,
           firstVote: firstVote._id,
@@ -129,6 +128,37 @@ router.get('/compare/:firstSenatorId/:secondSenatorId', function(req, res) {
       }
     }
     res.json(votePairs)
+  }).catch(err => res.send(err))
+})
+
+router.get('/compareTallies/:firstTallyId/:secondTallyId', function(req, res) {
+  console.log("Called compareTallies", req.params.firstTallyId)
+  Promise.all([
+    getVotes(req.params.firstTallyId),
+    getVotes(req.params.secondTallyId)
+  ]).then(function (bothVotes) {
+    const firstTallyVotes = bothVotes[0]
+    const secondTallyVotes = bothVotes[1]
+    let senatorsObject = {}
+    firstTallyVotes.forEach(function(vote) {
+      senatorsObject[vote.rep] = [vote]
+    })
+    secondTallyVotes.forEach(function(vote) {
+      senatorsObject[vote.rep].push(vote)
+    })
+    let oppositeVotes = []
+    for (let i=0; i<firstTallyVotes.length; i++) {
+      const firstVote = senatorsObject[firstTallyVotes[i].rep][0]
+      const secondVote = senatorsObject[firstTallyVotes[i].rep][1]
+      if ((firstVote.outcome === "NO" && secondVote.outcome === "YES") || (firstVote.outcome === "YES" && secondVote.outcome === "NO")) {
+        oppositeVotes.push({
+          senator: firstTallyVotes[i].rep,
+          firstVote: firstVote._id,
+          secondVote: secondVote._id
+        })
+      }
+    }
+    res.json(oppositeVotes)
   }).catch(err => res.send(err))
 })
 
