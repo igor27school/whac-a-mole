@@ -48,7 +48,7 @@ function mapStateToProps ({ bills }, { billId }) {
   return {
     bill,
     billId,
-    hasBill: bill && bill._id ? true : false,
+    hasBill: bill && '_id' in bill ? true : false,
   }
 }
 

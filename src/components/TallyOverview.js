@@ -13,10 +13,11 @@ export class TallyOverview extends Component {
     hasTally: PropTypes.bool.isRequired,
     tallyId: PropTypes.string.isRequired,
     tally: PropTypes.shape({
-      _id: PropTypes.string.isRequired,
-      bill: PropTypes.string.isRequired,
-      date: PropTypes.string.isRequired,
-      link: PropTypes.string.isRequired,
+      _id: PropTypes.string,
+      bill: PropTypes.string,
+      date: PropTypes.string,
+      link: PropTypes.string,
+      votes: PropTypes.arrayOf.string,
     }),
   }
   componentDidMount() {
@@ -30,8 +31,8 @@ export class TallyOverview extends Component {
     }
   }
   render() {
-    const { tally, tallyId } = this.props
-    if (!tally) {
+    const { tally, tallyId, hasTally } = this.props
+    if (!hasTally) {
       return (
         <h4>The tally {tallyId} does not exist</h4>
       )
@@ -51,7 +52,7 @@ function mapStateToProps ({ tallies }, { tallyId }) {
   return {
     tally,
     tallyId,
-    hasTally: tallies.allIds.length > 0,
+    hasTally: '_id' in tally ? true : false
   }
 }
 

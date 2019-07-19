@@ -33,7 +33,7 @@ export class TallySummary extends Component {
     }
     return (
       <div>
-        <Link to={`${tally.url}`}>Vote ({tally.formattedDate})</Link>
+        <Link to={`${tally.url}`}>Voted on {tally.bill} ({tally.formattedDate})</Link>
       </div>
     )
   }
